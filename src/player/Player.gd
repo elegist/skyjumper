@@ -2,11 +2,14 @@ extends KinematicBody
 
 var velocity: Vector3 = Vector3.ZERO
 
-export var move_speed: float = 50.0
-export var acceleration = 15.0
-export var jump_force: float = 30.0
-export var gravity: float = 1.5
-export var max_terminal_velocity: float = 60.0
+export var gravity: float = -40.0
+
+export var max_speed: float = 15.0
+export var acceleration: float = 70.0
+export var ground_friction: float = 60.0
+export var air_resistance: float = 50.0
+export var jump_height: float = 15.0
+export var dash_factor: int = 40
 
 var max_jump_count: int = 2
 var jump_count: int = 0
@@ -22,6 +25,8 @@ var rotation_interpolation = 10.0
 
 var origin_basis = Basis()
 var orientation = Transform()
+
+var snap_vector: Vector3 = Vector3.ZERO
 
 onready var mesh = $Mesh
 
@@ -55,32 +60,14 @@ func _process(delta: float) -> void:
 	camera_pivot.rotation.x = -camera_x_rotation
 
 func _physics_process(delta: float) -> void:
-	velocity.y = clamp(velocity.y - gravity, -max_terminal_velocity, max_terminal_velocity)
+	var input_vector = _get_input_vector()
+	var move_direction = _get_move_direction(input_vector)
 	
-	var move_direction: Vector2 = Vector2(
-		Input.get_action_strength("move_left") - Input.get_action_strength("move_right"),
-		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	)
+	_update_snap_vector()
 	
-	var movement: Vector2 = Vector2.ZERO
-	movement = movement.linear_interpolate(move_direction * move_speed, acceleration * delta)
+	apply_gravity(delta)
 	
-	var camera_z = -camera.global_transform.basis.z
-	var camera_x = camera.global_transform.basis.x
-	camera_z.y = 0
-	camera_z = camera_z.normalized()
-	camera_x.y = 0
-	camera_x = camera_x.normalized()
-	
-	var direction = -camera_x * movement.x - camera_z * movement.y
-	
-	velocity.x = direction.x
-	velocity.z = direction.z
-	
-	if move_direction.length() > 0.01:
-		rotate_character(direction, delta)
-	
-	velocity = move_and_slide(velocity, Vector3.UP)
+	apply_movement(move_direction, delta)
 	
 	if is_on_floor():
 		jump_count = max_jump_count
@@ -88,17 +75,50 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") && jump_count > 0:
 		apply_jump()
 		jump_count -= 1
-	elif Input.is_action_just_released("jump") && velocity.y > jump_force / 3:
-		velocity.y = jump_force / 3
+	elif Input.is_action_just_released("jump") && velocity.y > jump_height / 2:
+		velocity.y = jump_height / 2
+	
+	if Input.is_action_just_pressed("dash"):
+		apply_dash(move_direction, delta)
+	
+	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
+
+func _get_input_vector() -> Vector3:
+	var input_vector = Vector3.ZERO
+	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	input_vector.z = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	return input_vector.normalized() if input_vector.length() > 1 else input_vector
+
+func _get_move_direction(input_vector: Vector3) -> Vector3:
+	var move_direction = (input_vector.x * camera_root.transform.basis.x) + (input_vector.z * camera_root.transform.basis.z)
+	return move_direction
+
+func _update_snap_vector() -> void:
+	snap_vector = -get_floor_normal() if is_on_floor() else Vector3.DOWN
+
+func apply_gravity(delta: float) -> void:
+	velocity.y += gravity * delta
+	velocity.y = clamp(velocity.y, gravity, jump_height)
+
+func apply_movement(move_direction: Vector3, delta: float) -> void:
+	if move_direction != Vector3.ZERO:
+		velocity.x = velocity.move_toward(move_direction * max_speed, acceleration * delta).x
+		velocity.z = velocity.move_toward(move_direction * max_speed, acceleration * delta).z
+		mesh.rotation.y = lerp_angle(mesh.rotation.y, atan2(-move_direction.x, -move_direction.z), 10 * delta)
+	else:
+		if is_on_floor():
+			velocity = velocity.move_toward(Vector3.ZERO, ground_friction * delta)
+		else:
+			velocity.x = velocity.move_toward(Vector3.ZERO, air_resistance * delta).x
+			velocity.z = velocity.move_toward(Vector3.ZERO, air_resistance * delta).z
 
 func apply_jump() -> void:
-	velocity.y = jump_force
+	snap_vector = Vector3.ZERO
+	velocity.y = jump_height
 
-func rotate_character(direction: Vector3, delta: float) -> void:
-	var from = Quat(orientation.basis)
-	var to = Quat(Transform().looking_at(direction, Vector3.UP).basis)
-	
-	orientation.basis = Basis(from.slerp(to, delta * rotation_interpolation))
-	
-	orientation = orientation.orthonormalized()
-	mesh.global_transform.basis = orientation.basis
+func apply_dash(move_direction: Vector3, delta: float) -> void:
+	velocity.x = velocity.move_toward(move_direction * max_speed * dash_factor, acceleration * dash_factor * delta).x
+	velocity.z = velocity.move_toward(move_direction * max_speed * dash_factor, acceleration * dash_factor * delta).z
+	yield(get_tree().create_timer(0.25), "timeout")
+	velocity.x = velocity.move_toward(Vector3.ZERO, 50).x
+	velocity.z = velocity.move_toward(Vector3.ZERO, 50).z
