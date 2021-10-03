@@ -2,19 +2,23 @@ extends KinematicBody
 
 var velocity: Vector3 = Vector3.ZERO
 
-var min_vertical_camera_rotation: float = -40.0
-var max_vertical_camera_rotation: float = 70.0
-var camera_x_rotation: float = 0.0
+export var move_speed: float = 50.0
+export var acceleration = 15.0
+export var jump_force: float = 30.0
+export var gravity: float = 1.5
+export var max_terminal_velocity: float = 60.0
+
+var max_jump_count: int = 2
+var jump_count: int = 0
 
 export var mouse_sensitivity: Vector2 = Vector2(0.01, 0.004)
 export var right_stick_sensitivity: Vector2 = Vector2(0.07, 0.035)
 
-var move_interpolation = 15.0
-var rotation_interpolation = 10.0
+var min_vertical_camera_rotation: float = -50.0
+var max_vertical_camera_rotation: float = 50.0
+var camera_x_rotation: float = 0.0
 
-export var move_speed: float = 50.0
-export var jump_force: float = 10.0
-export var gravity: float = 9.8
+var rotation_interpolation = 10.0
 
 var origin_basis = Basis()
 var orientation = Transform()
@@ -23,7 +27,7 @@ onready var mesh = $Mesh
 
 onready var camera_root = $CameraRoot
 onready var camera_pivot = $CameraRoot/CameraPivot
-onready var camera = $CameraRoot/CameraPivot/CameraOffset/Camera
+onready var camera = $CameraRoot/CameraPivot/CameraSpringArm/Camera
 
 onready var origin_parent = get_parent()
 
@@ -51,13 +55,15 @@ func _process(delta: float) -> void:
 	camera_pivot.rotation.x = -camera_x_rotation
 
 func _physics_process(delta: float) -> void:
+	velocity.y = clamp(velocity.y - gravity, -max_terminal_velocity, max_terminal_velocity)
+	
 	var move_direction: Vector2 = Vector2(
 		Input.get_action_strength("move_left") - Input.get_action_strength("move_right"),
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	)
 	
 	var movement: Vector2 = Vector2.ZERO
-	movement = movement.linear_interpolate(move_direction * move_speed, move_interpolation * delta)
+	movement = movement.linear_interpolate(move_direction * move_speed, acceleration * delta)
 	
 	var camera_z = -camera.global_transform.basis.z
 	var camera_x = camera.global_transform.basis.x
@@ -75,6 +81,18 @@ func _physics_process(delta: float) -> void:
 		rotate_character(direction, delta)
 	
 	velocity = move_and_slide(velocity, Vector3.UP)
+	
+	if is_on_floor():
+		jump_count = max_jump_count
+	
+	if Input.is_action_just_pressed("jump") && jump_count > 0:
+		apply_jump()
+		jump_count -= 1
+	elif Input.is_action_just_released("jump") && velocity.y > jump_force / 3:
+		velocity.y = jump_force / 3
+
+func apply_jump() -> void:
+	velocity.y = jump_force
 
 func rotate_character(direction: Vector3, delta: float) -> void:
 	var from = Quat(orientation.basis)
@@ -84,34 +102,3 @@ func rotate_character(direction: Vector3, delta: float) -> void:
 	
 	orientation = orientation.orthonormalized()
 	mesh.global_transform.basis = orientation.basis
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

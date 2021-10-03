@@ -38,7 +38,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 
 [node name="CameraPivot" type="Spatial" parent="CameraRoot"]
 
-[node name="CameraOffset" type="Spatial" parent="CameraRoot/CameraPivot"]
+[node name="CameraSpringArm" type="SpringArm" parent="CameraRoot/CameraPivot"]
+spring_length = 10.0
 
-[node name="Camera" type="Camera" parent="CameraRoot/CameraPivot/CameraOffset"]
+[node name="Camera" type="Camera" parent="CameraRoot/CameraPivot/CameraSpringArm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
