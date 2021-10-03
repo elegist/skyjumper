@@ -1,6 +1,36 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Main.gd" type="Script" id=1]
+[ext_resource path="res://src/player/Player.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=2]
+seed = 9
+period = 108.1
+persistence = 1.0
+lacunarity = 1.55
+
+[sub_resource type="NoiseTexture" id=3]
+noise = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.854902, 0.854902, 0.854902, 1 )
+albedo_texture = SubResource( 3 )
+
+[sub_resource type="BoxShape" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 5 )
