@@ -5,22 +5,18 @@
 
 [sub_resource type="CubeMesh" id=1]
 
-[sub_resource type="OpenSimplexNoise" id=2]
-seed = 9
-period = 108.1
-persistence = 1.0
-lacunarity = 1.55
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.427451, 0.427451, 0.427451, 1 )
 
-[sub_resource type="NoiseTexture" id=3]
-noise = SubResource( 2 )
+[sub_resource type="BoxShape" id=3]
 
 [sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.854902, 0.854902, 0.854902, 1 )
-albedo_texture = SubResource( 3 )
+albedo_color = Color( 0.615686, 0, 0, 1 )
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="CubeMesh" id=5]
 
-[sub_resource type="CubeMesh" id=6]
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.121569, 0.705882, 0, 1 )
 
 [sub_resource type="BoxShape" id=7]
 
@@ -32,20 +28,120 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
 transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, 0 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
 mesh = SubResource( 1 )
-material/0 = SubResource( 4 )
+material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 5 )
+shape = SubResource( 3 )
+
+[node name="StaticBody3" type="StaticBody" parent="."]
+transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, -78.8566 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody3"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody3"]
+shape = SubResource( 3 )
+
+[node name="StaticBody5" type="StaticBody" parent="."]
+transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 93, -1, -85.8566 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody5"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody5"]
+shape = SubResource( 3 )
+
+[node name="StaticBody6" type="StaticBody" parent="."]
+transform = Transform( -8.74228e-07, 1, 0, -10, -2.18557e-08, 0, 0, 0, 20, 112.007, 9.68775, -85.8566 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody6"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody6"]
+shape = SubResource( 3 )
+
+[node name="StaticBody7" type="StaticBody" parent="."]
+transform = Transform( -8.74228e-07, 1, 0, -10, -2.18557e-08, 0, 0, 0, 20, -18.9926, 9.68775, -78.8566 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody7"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody7"]
+shape = SubResource( 3 )
+
+[node name="StaticBody8" type="StaticBody" parent="."]
+transform = Transform( -8.74228e-07, 1, 0, -10, -2.18557e-08, 0, 0, 0, 20, -18.9926, 9.68775, -38.8566 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody8"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody8"]
+shape = SubResource( 3 )
+
+[node name="StaticBody9" type="StaticBody" parent="."]
+transform = Transform( -8.74228e-07, 1, 0, -10, -2.18557e-08, 0, 0, 0, 20, -18.9926, 9.68775, 0.143417 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody9"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody9"]
+shape = SubResource( 3 )
 
 [node name="StaticBody2" type="StaticBody" parent="."]
-transform = Transform( 5, 0, 0, 0, 0.92164, -1.94023, 0, 0.388047, 4.6082, 0, 1.02822, -4.46072 )
+transform = Transform( 5, 0, 0, 0, 0.92164, -1.94023, 0, 0.388047, 4.6082, 0, 1.02822, -24.0823 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
-mesh = SubResource( 6 )
-material/0 = null
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
 shape = SubResource( 7 )
+
+[node name="StaticBody4" type="StaticBody" parent="."]
+transform = Transform( 5, 0, 0, 0, 0.92164, -1.94023, 0, 0.388047, 4.6082, 44.936, 1.02822, -93.213 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody4"]
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody4"]
+shape = SubResource( 7 )
+
+[editable path="Player"]
+[editable path="Player/Mesh/skyjumper"]

@@ -4,11 +4,11 @@ var velocity: Vector3 = Vector3.ZERO
 
 export var gravity: float = -40.0
 
-export var max_speed: float = 15.0
+export var max_speed: float = 16.0
 export var acceleration: float = 70.0
 export var ground_friction: float = 60.0
 export var air_resistance: float = 50.0
-export var jump_height: float = 15.0
+export var jump_height: float = 18.0
 export var dash_factor: int = 40
 
 var max_jump_count: int = 2
@@ -33,6 +33,7 @@ onready var mesh = $Mesh
 onready var camera_root = $CameraRoot
 onready var camera_pivot = $CameraRoot/CameraPivot
 onready var camera = $CameraRoot/CameraPivot/CameraSpringArm/Camera
+onready var animation_tree = $Mesh/AnimationTree
 
 onready var origin_parent = get_parent()
 
@@ -47,7 +48,7 @@ func _input(event: InputEvent) -> void:
 		camera_x_rotation = clamp(camera_x_rotation + event.relative.y * mouse_sensitivity.y, deg2rad(min_vertical_camera_rotation), deg2rad(max_vertical_camera_rotation))
 		camera_pivot.rotation.x = -camera_x_rotation
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var camera_target: Vector2 = Vector2.ZERO
 	camera_target = Vector2(
 		Input.get_action_strength("camera_left") - Input.get_action_strength("camera_right"), 
@@ -82,6 +83,8 @@ func _physics_process(delta: float) -> void:
 		apply_dash(move_direction, delta)
 	
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
+	
+	apply_animations()
 
 func _get_input_vector() -> Vector3:
 	var input_vector = Vector3.ZERO
@@ -122,3 +125,19 @@ func apply_dash(move_direction: Vector3, delta: float) -> void:
 	yield(get_tree().create_timer(0.25), "timeout")
 	velocity.x = velocity.move_toward(Vector3.ZERO, 50).x
 	velocity.z = velocity.move_toward(Vector3.ZERO, 50).z
+
+func apply_animations() -> void:
+	if !is_on_floor():
+		animation_tree.set("parameters/location/current", 1)
+		if velocity.y < 0:
+			animation_tree.set("parameters/air_state/current", 1)
+		else:
+			animation_tree.set("parameters/air_state/current", 0)
+	else:
+		animation_tree.set("parameters/location/current", 0)
+		if velocity.x != 0 || velocity.z != 0:
+			animation_tree.set("parameters/ground_state/current", 1)
+			animation_tree.set("parameters/run_speed/scale", abs(velocity.length() / max_speed))
+		else:
+			animation_tree.set("parameters/ground_state/current", 0)
+			animation_tree.set("parameters/run_speed/scale", 1.0)
