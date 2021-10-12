@@ -14,7 +14,7 @@ export var dash_factor: int = 40
 var max_jump_count: int = 2
 var jump_count: int = 0
 
-export var mouse_sensitivity: Vector2 = Vector2(0.01, 0.004)
+export var mouse_sensitivity: Vector2 = Vector2(0.0025, 0.0025)
 export var right_stick_sensitivity: Vector2 = Vector2(0.07, 0.035)
 
 var min_vertical_camera_rotation: float = -50.0
@@ -34,6 +34,10 @@ onready var camera_root = $CameraRoot
 onready var camera_pivot = $CameraRoot/CameraPivot
 onready var camera = $CameraRoot/CameraPivot/CameraSpringArm/Camera
 onready var animation_tree = $Mesh/AnimationTree
+
+onready var wall_check_forward = $Mesh/WallChecks/Forward
+onready var wall_check_left = $Mesh/WallChecks/Left
+onready var wall_check_right = $Mesh/WallChecks/Right
 
 onready var origin_parent = get_parent()
 
@@ -82,6 +86,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash"):
 		apply_dash(move_direction, delta)
 	
+	if Input.is_action_pressed("dash"):
+		if is_on_wall():
+			apply_wallrun(move_direction)
+	else:
+		wall_check_forward.enabled = false
+		wall_check_left.enabled = false
+		wall_check_right.enabled = false
+	
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
 	
 	apply_animations()
@@ -126,18 +138,34 @@ func apply_dash(move_direction: Vector3, delta: float) -> void:
 	velocity.x = velocity.move_toward(Vector3.ZERO, 50).x
 	velocity.z = velocity.move_toward(Vector3.ZERO, 50).z
 
+func apply_wallrun(move_direction: Vector3) -> void:
+	wall_check_forward.enabled = true
+	wall_check_left.enabled = true
+	wall_check_right.enabled = true
+	
+	if wall_check_forward.is_colliding() && (!wall_check_left.is_colliding() || wall_check_right.is_colliding()):
+		velocity.y = max_speed
+	if wall_check_left.is_colliding() || wall_check_right.is_colliding():
+		velocity.x = move_direction.x * max_speed
+		velocity.z = move_direction.z * max_speed
+		velocity.y = 0.0
+
 func apply_animations() -> void:
-	if !is_on_floor():
-		animation_tree.set("parameters/location/current", 1)
-		if velocity.y < 0:
-			animation_tree.set("parameters/air_state/current", 1)
-		else:
-			animation_tree.set("parameters/air_state/current", 0)
-	else:
+	if is_on_wall():
 		animation_tree.set("parameters/location/current", 0)
-		if velocity.x != 0 || velocity.z != 0:
-			animation_tree.set("parameters/ground_state/current", 1)
-			animation_tree.set("parameters/run_speed/scale", abs(velocity.length() / max_speed))
+		animation_tree.set("parameters/ground_state/current", 1)
+	else:
+		if !is_on_floor():
+			animation_tree.set("parameters/location/current", 1)
+			if velocity.y < 0:
+				animation_tree.set("parameters/air_state/current", 1)
+			else:
+				animation_tree.set("parameters/air_state/current", 0)
 		else:
-			animation_tree.set("parameters/ground_state/current", 0)
-			animation_tree.set("parameters/run_speed/scale", 1.0)
+			animation_tree.set("parameters/location/current", 0)
+			if velocity.x != 0 || velocity.z != 0:
+				animation_tree.set("parameters/ground_state/current", 1)
+				animation_tree.set("parameters/run_speed/scale", abs(velocity.length() / max_speed))
+			else:
+				animation_tree.set("parameters/ground_state/current", 0)
+				animation_tree.set("parameters/run_speed/scale", 1.0)

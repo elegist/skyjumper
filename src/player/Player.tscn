@@ -3,7 +3,7 @@
 [ext_resource path="res://src/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/skyjumper.glb" type="PackedScene" id=2]
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=1]
 resource_name = "FallLoop"
 length = 1.66667
 loop = true
@@ -155,7 +155,7 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1.66667, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=2]
 resource_name = "IdleLoop"
 length = 4.16667
 loop = true
@@ -307,7 +307,7 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 0.0714157, -0.940357, 0.538544, 0, 0, 0, 1, 1, 1, 1, 4.16667, 1, 0.0714157, -0.940357, 0.538544, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=3]
 resource_name = "RunLoop"
 length = 0.708333
 loop = true
@@ -459,7 +459,7 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 0.0714162, -3.45531, -0.716823, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, 0.0714161, -3.22015, -0.385375, 0, 0, 0, 1, 1, 1, 1, 0.133333, 1, 0.0714158, -2.22787, 0.379927, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, 0.0714159, -1.22886, 0.121427, 0, 0, 0, 1, 1, 1, 1, 0.266667, 1, 0.0714163, 0.444244, -0.986236, 0, 0, 0, 1, 1, 1, 1, 0.333333, 1, 0.0714167, 1.62409, -1.87997, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, 0.0714164, 1.6127, -1.24811, 0, 0, 0, 1, 1, 1, 1, 0.466667, 1, 0.0714161, 1.42239, -0.431895, 0, 0, 0, 1, 1, 1, 1, 0.533333, 1, 0.0714158, 0.540823, 0.260055, 0, 0, 0, 1, 1, 1, 1, 0.6, 1, 0.071416, -1.8687, -0.200041, 0, 0, 0, 1, 1, 1, 1, 0.666667, 1, 0.0714163, -3.61233, -0.82856, 0, 0, 0, 1, 1, 1, 1, 0.708333, 1, 0.0714162, -3.45531, -0.716823, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="AnimationNodeTransition" id=18]
+[sub_resource type="AnimationNodeTransition" id=4]
 input_count = 2
 xfade_time = 0.25
 input_0/name = "jump"
@@ -467,10 +467,10 @@ input_0/auto_advance = false
 input_1/name = "fall"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=5]
 animation = "FallLoop"
 
-[sub_resource type="AnimationNodeTransition" id=20]
+[sub_resource type="AnimationNodeTransition" id=6]
 input_count = 2
 xfade_time = 0.25
 input_0/name = "idle"
@@ -478,13 +478,13 @@ input_0/auto_advance = false
 input_1/name = "run"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "IdleLoop"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "Jump"
 
-[sub_resource type="AnimationNodeTransition" id=22]
+[sub_resource type="AnimationNodeTransition" id=9]
 input_count = 2
 xfade_time = 0.25
 input_0/name = "ground"
@@ -492,31 +492,31 @@ input_0/auto_advance = false
 input_1/name = "air"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "RunLoop"
 
-[sub_resource type="AnimationNodeTimeScale" id=17]
+[sub_resource type="AnimationNodeTimeScale" id=11]
 
-[sub_resource type="AnimationNodeBlendTree" id=24]
+[sub_resource type="AnimationNodeBlendTree" id=12]
 graph_offset = Vector2( -419, 163 )
-nodes/air_state/node = SubResource( 18 )
+nodes/air_state/node = SubResource( 4 )
 nodes/air_state/position = Vector2( 140, 460 )
-nodes/fall/node = SubResource( 19 )
+nodes/fall/node = SubResource( 5 )
 nodes/fall/position = Vector2( -60, 540 )
-nodes/ground_state/node = SubResource( 20 )
+nodes/ground_state/node = SubResource( 6 )
 nodes/ground_state/position = Vector2( -60, 200 )
-nodes/idle/node = SubResource( 8 )
+nodes/idle/node = SubResource( 7 )
 nodes/idle/position = Vector2( -260, 180 )
-nodes/jump/node = SubResource( 21 )
+nodes/jump/node = SubResource( 8 )
 nodes/jump/position = Vector2( -60, 420 )
-nodes/location/node = SubResource( 22 )
+nodes/location/node = SubResource( 9 )
 nodes/location/position = Vector2( 320, 200 )
 nodes/output/position = Vector2( 600, 200 )
-nodes/run/node = SubResource( 23 )
+nodes/run/node = SubResource( 10 )
 nodes/run/position = Vector2( -260, 300 )
-nodes/run_speed/node = SubResource( 17 )
+nodes/run_speed/node = SubResource( 11 )
 nodes/run_speed/position = Vector2( 140, 220 )
-node_connections = [ "output", 0, "location", "location", 0, "run_speed", "location", 1, "air_state", "ground_state", 0, "idle", "ground_state", 1, "run", "air_state", 0, "jump", "air_state", 1, "fall", "run_speed", 0, "ground_state" ]
+node_connections = [ "output", 0, "location", "location", 0, "run_speed", "location", 1, "air_state", "ground_state", 0, "idle", "ground_state", 1, "run", "run_speed", 0, "ground_state", "air_state", 0, "jump", "air_state", 1, "fall" ]
 
 [sub_resource type="CapsuleShape" id=13]
 
@@ -529,18 +529,32 @@ script = ExtResource( 1 )
 transform = Transform( -0.3, 0, -2.62268e-08, 0, 0.3, 0, 2.62268e-08, 0, -0.3, 0, 0.123775, 0 )
 
 [node name="AnimationPlayer" parent="Mesh/skyjumper" index="1"]
-anims/FallLoop = SubResource( 14 )
-anims/IdleLoop = SubResource( 15 )
-anims/RunLoop = SubResource( 16 )
+anims/FallLoop = SubResource( 1 )
+anims/IdleLoop = SubResource( 2 )
+anims/RunLoop = SubResource( 3 )
 
 [node name="AnimationTree" type="AnimationTree" parent="Mesh"]
-tree_root = SubResource( 24 )
+tree_root = SubResource( 12 )
 anim_player = NodePath("../skyjumper/AnimationPlayer")
 active = true
 parameters/air_state/current = 0
 parameters/ground_state/current = 0
 parameters/location/current = 0
 parameters/run_speed/scale = 1.0
+
+[node name="WallChecks" type="Spatial" parent="Mesh"]
+
+[node name="Forward" type="RayCast" parent="Mesh/WallChecks"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+cast_to = Vector3( 0, 0, -5 )
+
+[node name="Left" type="RayCast" parent="Mesh/WallChecks"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+cast_to = Vector3( -5, 0, 0 )
+
+[node name="Right" type="RayCast" parent="Mesh/WallChecks"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+cast_to = Vector3( 5, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1.2, 0, 1, -5.24537e-08, 0, 1.8, 0 )
