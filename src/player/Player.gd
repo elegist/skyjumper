@@ -2,6 +2,8 @@ extends KinematicBody
 
 var velocity: Vector3 = Vector3.ZERO
 
+var is_dashing: bool = false
+
 export var gravity: float = -40.0
 
 export var max_speed: float = 16.0
@@ -83,7 +85,7 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_released("jump") && velocity.y > jump_height / 2:
 		velocity.y = jump_height / 2
 	
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") && !is_on_floor():
 		apply_dash(move_direction, delta)
 	
 	if Input.is_action_pressed("dash"):
@@ -119,7 +121,7 @@ func apply_movement(move_direction: Vector3, delta: float) -> void:
 	if move_direction != Vector3.ZERO:
 		velocity.x = velocity.move_toward(move_direction * max_speed, acceleration * delta).x
 		velocity.z = velocity.move_toward(move_direction * max_speed, acceleration * delta).z
-		mesh.rotation.y = lerp_angle(mesh.rotation.y, atan2(-move_direction.x, -move_direction.z), 10 * delta)
+		mesh.rotation.y = lerp_angle(mesh.rotation.y, atan2(move_direction.x, move_direction.z), 10 * delta)
 	else:
 		if is_on_floor():
 			velocity = velocity.move_toward(Vector3.ZERO, ground_friction * delta)
@@ -132,11 +134,13 @@ func apply_jump() -> void:
 	velocity.y = jump_height
 
 func apply_dash(move_direction: Vector3, delta: float) -> void:
+	is_dashing = true
 	velocity.x = velocity.move_toward(move_direction * max_speed * dash_factor, acceleration * dash_factor * delta).x
 	velocity.z = velocity.move_toward(move_direction * max_speed * dash_factor, acceleration * dash_factor * delta).z
 	yield(get_tree().create_timer(0.25), "timeout")
 	velocity.x = velocity.move_toward(Vector3.ZERO, 50).x
 	velocity.z = velocity.move_toward(Vector3.ZERO, 50).z
+	is_dashing = false
 
 func apply_wallrun(move_direction: Vector3) -> void:
 	wall_check_forward.enabled = true
@@ -152,15 +156,21 @@ func apply_wallrun(move_direction: Vector3) -> void:
 
 func apply_animations() -> void:
 	if is_on_wall():
-		animation_tree.set("parameters/location/current", 0)
-		animation_tree.set("parameters/ground_state/current", 1)
+		animation_tree.set("parameters/location/current", 2)
+		animation_tree.set("parameters/TimeScale/scale", 2)
+		if wall_check_left.is_colliding():
+			animation_tree.set("parameters/wall/current", 1)
+		elif wall_check_right.is_colliding():
+			animation_tree.set("parameters/wall/current", 0)
 	else:
 		if !is_on_floor():
 			animation_tree.set("parameters/location/current", 1)
 			if velocity.y < 0:
 				animation_tree.set("parameters/air_state/current", 1)
-			else:
+			elif velocity.y > 0 && !is_dashing:
 				animation_tree.set("parameters/air_state/current", 0)
+			if is_dashing:
+				animation_tree.set("parameters/air_state/current", 2)
 		else:
 			animation_tree.set("parameters/location/current", 0)
 			if velocity.x != 0 || velocity.z != 0:

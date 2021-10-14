@@ -24,7 +24,30 @@ albedo_color = Color( 0.121569, 0.705882, 0, 1 )
 script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.283686, 0 )
+
+[node name="Skeleton" parent="Player/Mesh/skyjumper_all_animations_decimated/Armature" index="0"]
+bones/3/bound_children = [  ]
+
+[node name="BoneAttachment" parent="Player/Mesh/skyjumper_all_animations_decimated/Armature/Skeleton" index="1"]
+transform = Transform( 1, -1.922e-09, 2.38403e-07, -2.08947e-09, 0.999858, 0.0168254, -2.38401e-07, -0.0168254, 0.999858, -7.34566e-09, 4.26118, -0.0624813 )
+
+[node name="SoftBody" parent="Player/Mesh/skyjumper_all_animations_decimated/Armature/Skeleton/BoneAttachment" index="0"]
+attachments/0/offset = Vector3( 2.04546, 0.53018, -0.41126 )
+attachments/1/offset = Vector3( 2.5, 0.53018, -0.41126 )
+attachments/2/offset = Vector3( 1.59091, 0.53018, -0.41126 )
+attachments/3/offset = Vector3( 1.13637, 0.53018, -0.41126 )
+attachments/4/offset = Vector3( 0.681823, 0.53018, -0.41126 )
+attachments/5/offset = Vector3( 0.227277, 0.53018, -0.41126 )
+attachments/6/offset = Vector3( -0.227268, 0.53018, -0.41126 )
+attachments/7/offset = Vector3( -0.681814, 0.53018, -0.41126 )
+attachments/8/offset = Vector3( -1.13636, 0.53018, -0.41126 )
+attachments/9/offset = Vector3( -1.5909, 0.53018, -0.41126 )
+attachments/10/offset = Vector3( -2.04545, 0.53018, -0.41126 )
+attachments/11/offset = Vector3( -2.5, 0.53018, -0.41126 )
+
+[node name="AnimationTree" parent="Player/Mesh" index="1"]
+parameters/TimeScale/scale = 1.0
 
 [node name="StaticBody" type="StaticBody" parent="."]
 transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, 0 )
@@ -144,4 +167,4 @@ material/0 = SubResource( 6 )
 shape = SubResource( 7 )
 
 [editable path="Player"]
-[editable path="Player/Mesh/skyjumper"]
+[editable path="Player/Mesh/skyjumper_all_animations_decimated"]
