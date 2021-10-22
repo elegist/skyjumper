@@ -5,6 +5,8 @@ var velocity: Vector3 = Vector3.ZERO
 var is_dashing: bool = false
 var is_wall_running: bool = false
 
+var can_dash: bool = false
+
 export var gravity: float = -40.0
 
 export var max_speed: float = 20.0
@@ -86,17 +88,20 @@ func _physics_process(delta: float) -> void:
 		jump_count = max_jump_count
 		is_dashing = false
 		is_wall_running = false
+		can_dash = true
 	
 	if Input.is_action_just_pressed("jump") && jump_count > 0 && !is_on_wall():
 		apply_jump()
 	elif Input.is_action_just_released("jump") && velocity.y > jump_height / 2:
 		velocity.y = jump_height / 2
 	
-	if Input.is_action_just_pressed("dash") && !is_on_floor():
+	if Input.is_action_just_pressed("dash") && !is_on_floor() && can_dash:
 		apply_dash(move_direction, delta)
 		dash_direction = move_direction
+		can_dash = false
 	
 	if is_on_wall() && !is_on_floor():
+		can_dash = true
 		wall_normal = get_slide_collision(0).normal
 		if Input.is_action_pressed("dash"):
 			wall_check_left.enabled = true
