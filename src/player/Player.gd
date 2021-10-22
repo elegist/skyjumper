@@ -43,6 +43,7 @@ onready var animation_tree = $Mesh/AnimationTree
 
 onready var wall_check_left = $Mesh/WallChecks/Left
 onready var wall_check_right = $Mesh/WallChecks/Right
+onready var wall_check_forward = $Mesh/WallChecks/Forward
 
 onready var origin_parent = get_parent()
 
@@ -56,6 +57,8 @@ func _input(event: InputEvent) -> void:
 		camera_root.orthonormalize()
 		camera_x_rotation = clamp(camera_x_rotation + event.relative.y * mouse_sensitivity.y, deg2rad(min_vertical_camera_rotation), deg2rad(max_vertical_camera_rotation))
 		camera_pivot.rotation.x = -camera_x_rotation
+	if event.is_action_pressed("reset"):
+		get_tree().reload_current_scene()
 
 func _process(_delta: float) -> void:
 	var camera_target: Vector2 = Vector2.ZERO
@@ -71,14 +74,13 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var input_vector = _get_input_vector()
-	var move_direction = _get_move_direction(input_vector)
+	var move_direction = dash_direction if is_wall_running else _get_move_direction(input_vector)
 	
 	_update_snap_vector()
 	
 	apply_gravity(delta)
 	
-	if !is_on_wall():
-		apply_movement(move_direction, delta)
+	apply_movement(move_direction, delta)
 	
 	if is_on_floor():
 		jump_count = max_jump_count
@@ -94,17 +96,22 @@ func _physics_process(delta: float) -> void:
 		apply_dash(move_direction, delta)
 		dash_direction = move_direction
 	
-	if is_on_wall():
+	if is_on_wall() && !is_on_floor():
 		wall_normal = get_slide_collision(0).normal
 		if Input.is_action_pressed("dash"):
 			wall_check_left.enabled = true
 			wall_check_right.enabled = true
+			wall_check_forward.enabled = true
 			apply_wall_run(delta)
 			if Input.is_action_just_pressed("jump"):
 				apply_wall_jump()
+		else:
+			is_wall_running = false
 	else:
 		wall_check_left.enabled = false
 		wall_check_right.enabled = false
+		wall_check_forward.enabled = false
+		is_wall_running = false
 	
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
 	
@@ -158,8 +165,14 @@ func apply_dash(move_direction: Vector3, delta: float) -> void:
 
 func apply_wall_run(delta: float) -> void:
 	is_wall_running = true
-	velocity.x = sign(dash_direction.x) * max_speed
-	velocity.z = sign(dash_direction.z) * max_speed
+	if wall_check_left.is_colliding() || wall_check_right.is_colliding():
+		wall_check_forward.enabled = false
+		velocity.x = sign(dash_direction.x) * max_speed
+		velocity.z = sign(dash_direction.z) * max_speed
+	if wall_check_forward.is_colliding():
+		wall_check_left.enabled = false
+		wall_check_right.enabled = false
+		velocity.y = max_speed
 
 func apply_wall_jump() -> void:
 	is_wall_running = false
@@ -179,6 +192,8 @@ func apply_animations() -> void:
 			animation_tree.set("parameters/wall/current", 0)
 		if wall_check_right.is_colliding():
 			animation_tree.set("parameters/wall/current", 1)
+		if wall_check_forward.is_colliding():
+			animation_tree.set("parameters/wall/current", 2)
 	else:
 		if !is_on_floor():
 			animation_tree.set("parameters/location/current", 1)
