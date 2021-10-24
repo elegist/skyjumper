@@ -8,6 +8,8 @@ var is_wall_running: bool = false
 var can_dash: bool = false
 var can_wall_run: bool = false
 
+var wallrun_started_once: bool = false
+
 export var gravity: float = -40.0
 
 export var max_speed: float = 20.0
@@ -47,6 +49,8 @@ onready var animation_tree = $Mesh/AnimationTree
 onready var wall_check_left = $Mesh/WallChecks/Left
 onready var wall_check_right = $Mesh/WallChecks/Right
 onready var wall_check_forward = $Mesh/WallChecks/Forward
+
+onready var timer_wall_run = $WallRunTimer
 
 onready var origin_parent = get_parent()
 
@@ -90,6 +94,7 @@ func _physics_process(delta: float) -> void:
 		is_dashing = false
 		is_wall_running = false
 		can_dash = true
+		wallrun_started_once = false
 	
 	if Input.is_action_just_pressed("jump") && jump_count > 0 && !is_wall_running:
 		apply_jump()
@@ -102,15 +107,27 @@ func _physics_process(delta: float) -> void:
 		can_dash = false
 	
 	if is_on_wall() && !is_on_floor():
+		can_wall_run = true
+	else:
+		can_wall_run = false
+	
+	print(timer_wall_run.get_time_left())
+	
+	if can_wall_run:
 		can_dash = true
 		wall_normal = get_slide_collision(0).normal
 		if Input.is_action_pressed("dash"):
-			wall_check_left.enabled = true
-			wall_check_right.enabled = true
-			wall_check_forward.enabled = true
-			apply_wall_run(delta)
+			if timer_wall_run.is_stopped() && !wallrun_started_once:
+				timer_wall_run.start()
+				wallrun_started_once = true
+			if !timer_wall_run.is_stopped():
+				wall_check_left.enabled = true
+				wall_check_right.enabled = true
+				wall_check_forward.enabled = true
+				apply_wall_run(delta)
 			if Input.is_action_just_pressed("jump"):
 				apply_wall_jump()
+				wallrun_started_once = false
 		else:
 			is_wall_running = false
 	else:
@@ -214,6 +231,6 @@ func apply_animations() -> void:
 				animation_tree.set("parameters/ground_state/current", 0)
 				animation_tree.set("parameters/run_speed/scale", 1.0)
 
-
 func _on_WallRunTimer_timeout() -> void:
+	timer_wall_run.stop()
 	can_wall_run = false

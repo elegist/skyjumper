@@ -89,6 +89,12 @@ width = 6.0
 height = 10.0
 material = ExtResource( 3 )
 
+[node name="CSGBox21" type="CSGBox" parent="Stage01/CSGCombiner"]
+transform = Transform( -1, 0, 4.37114e-08, 0, 1, 0, -4.37114e-08, 0, -1, -65, 31, -31 )
+width = 6.0
+height = 42.0
+material = ExtResource( 3 )
+
 [node name="CSGBox18" type="CSGBox" parent="Stage01/CSGCombiner"]
 transform = Transform( 0, 0, -1, 0, 1, 0, 1, 0, 0, -61, 24, -27 )
 width = 6.0
