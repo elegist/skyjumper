@@ -108,10 +108,9 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_wall() && !is_on_floor():
 		can_wall_run = true
+		jump_count = max_jump_count
 	else:
 		can_wall_run = false
-	
-	print(timer_wall_run.get_time_left())
 	
 	if can_wall_run:
 		can_dash = true
@@ -202,6 +201,7 @@ func apply_wall_jump() -> void:
 		dash_direction.x *= -1
 	elif round(wall_normal.z) != 0:
 		dash_direction.z *= -1
+	jump_count -= 1
 
 func apply_animations() -> void:
 	if is_on_wall() && Input.is_action_pressed("dash"):
