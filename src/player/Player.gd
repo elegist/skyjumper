@@ -6,6 +6,7 @@ var is_dashing: bool = false
 var is_wall_running: bool = false
 
 var can_dash: bool = false
+var can_wall_run: bool = false
 
 export var gravity: float = -40.0
 
@@ -90,7 +91,7 @@ func _physics_process(delta: float) -> void:
 		is_wall_running = false
 		can_dash = true
 	
-	if Input.is_action_just_pressed("jump") && jump_count > 0 && !is_on_wall():
+	if Input.is_action_just_pressed("jump") && jump_count > 0 && !is_wall_running:
 		apply_jump()
 	elif Input.is_action_just_released("jump") && velocity.y > jump_height / 2:
 		velocity.y = jump_height / 2
@@ -136,13 +137,8 @@ func _update_snap_vector() -> void:
 	snap_vector = -get_floor_normal() if is_on_floor() else Vector3.DOWN
 
 func apply_gravity(delta: float) -> void:
-	if is_wall_running:
-		var wall_running_factor = 8
-		velocity.y += gravity / wall_running_factor * delta
-		velocity.y = clamp(velocity.y, gravity / wall_running_factor, max_gravity_drag / wall_running_factor)
-	else:
-		velocity.y += gravity * delta
-		velocity.y = clamp(velocity.y, gravity, max_gravity_drag)
+	velocity.y += gravity * delta
+	velocity.y = clamp(velocity.y, gravity, max_gravity_drag)
 
 func apply_movement(move_direction: Vector3, delta: float) -> void:
 	if move_direction != Vector3.ZERO:
@@ -172,6 +168,7 @@ func apply_wall_run(delta: float) -> void:
 	is_wall_running = true
 	if wall_check_left.is_colliding() || wall_check_right.is_colliding():
 		wall_check_forward.enabled = false
+		velocity.y = 0.0
 		velocity.x = sign(dash_direction.x) * max_speed
 		velocity.z = sign(dash_direction.z) * max_speed
 	if wall_check_forward.is_colliding():
@@ -181,9 +178,9 @@ func apply_wall_run(delta: float) -> void:
 
 func apply_wall_jump() -> void:
 	is_wall_running = false
-	velocity.y = jump_height / 1.1
-	velocity.x = wall_normal.x * 50
-	velocity.z = wall_normal.z * 50
+	velocity.y = jump_height * 0.5
+	velocity.x = wall_normal.x * 30
+	velocity.z = wall_normal.z * 30
 	if round(wall_normal.x) != 0:
 		dash_direction.x *= -1
 	elif round(wall_normal.z) != 0:
@@ -216,3 +213,7 @@ func apply_animations() -> void:
 			else:
 				animation_tree.set("parameters/ground_state/current", 0)
 				animation_tree.set("parameters/run_speed/scale", 1.0)
+
+
+func _on_WallRunTimer_timeout() -> void:
+	can_wall_run = false
