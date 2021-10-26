@@ -39,6 +39,8 @@ var orientation = Transform()
 
 var snap_vector: Vector3 = Vector3.ZERO
 
+var count = 0
+
 onready var mesh = $Mesh
 
 onready var camera_root = $CameraRoot
@@ -234,3 +236,7 @@ func apply_animations() -> void:
 func _on_WallRunTimer_timeout() -> void:
 	timer_wall_run.stop()
 	can_wall_run = false
+
+func add_collectable() -> void:
+	count += 1
+	print(count)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Main.gd" type="Script" id=1]
 [ext_resource path="res://src/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/prototypecubes/Material_007.material" type="Material" id=3]
+[ext_resource path="res://src/collectables/Feather.tscn" type="PackedScene" id=4]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -296,3 +297,68 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -5, -1,
 polygon = PoolVector2Array( 0, -7, 0, 1, 0, 1, 9, -7 )
 depth = 2.0
 material = ExtResource( 3 )
+
+[node name="Feathers" type="Spatial" parent="Stage01"]
+
+[node name="Feather" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12 )
+
+[node name="Feather2" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 20 )
+
+[node name="Feather3" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28 )
+
+[node name="Feather4" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 42 )
+
+[node name="Feather5" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -16, 2, 42 )
+
+[node name="Feather6" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -18, 2, 42 )
+
+[node name="Feather7" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 2, 42 )
+
+[node name="Feather8" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -25, 0, 42 )
+
+[node name="Feather9" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -36, 2, 42 )
+
+[node name="Feather10" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -36, 4, 42 )
+
+[node name="Feather11" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -36, 6, 42 )
+
+[node name="Feather12" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -36, 8, 42 )
+
+[node name="Feather13" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -54, 11, 43 )
+
+[node name="Feather14" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -56, 11, 43 )
+
+[node name="Feather15" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -58, 11, 43 )
+
+[node name="Feather16" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -60, 11, 43 )
+
+[node name="Feather17" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -62, 11, 43 )
+
+[node name="Feather18" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -64, 11, 43 )
+
+[node name="Feather19" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -66, 11, 43 )
+
+[node name="Feather20" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -66, 11, 41 )
+
+[node name="Feather21" parent="Stage01/Feathers" instance=ExtResource( 4 )]
+transform = Transform( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -66, 11, 39 )
