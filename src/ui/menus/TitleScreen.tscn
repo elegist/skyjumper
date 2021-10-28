@@ -1,0 +1,270 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/fonts/aBlackLives.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/ui/fonts/philosopher-bold-48.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/ui/fonts/philosopher-bold-64.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/ui/menus/TitleScreen.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 120
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 1 )
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="VBoxContainer" parent="."]
+anchor_left = 0.0416667
+anchor_top = 0.0740741
+anchor_right = 0.958333
+anchor_bottom = 0.217593
+margin_bottom = -80.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="MainTitle" type="Label" parent="Title"]
+margin_right = 1759.0
+margin_bottom = 121.0
+custom_fonts/font = SubResource( 1 )
+text = "Sky Jumper"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="Title"]
+margin_top = 125.0
+margin_right = 1759.0
+margin_bottom = 155.0
+custom_fonts/font = SubResource( 2 )
+text = "Gameplay Mechanic Demo"
+align = 1
+valign = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.0482831
+anchor_top = 0.300651
+anchor_right = 0.419116
+anchor_bottom = 0.932133
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="MainMenu" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 711.0
+margin_bottom = 682.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ButtonStart" type="Button" parent="MarginContainer/MainMenu"]
+margin_top = 157.0
+margin_right = 711.0
+margin_bottom = 234.0
+rect_min_size = Vector2( 360, 60 )
+custom_fonts/font = ExtResource( 3 )
+text = "Start Game"
+flat = true
+
+[node name="ButtonSettings" type="Button" parent="MarginContainer/MainMenu"]
+margin_top = 254.0
+margin_right = 711.0
+margin_bottom = 331.0
+rect_min_size = Vector2( 360, 60 )
+custom_fonts/font = ExtResource( 3 )
+text = "Settings"
+flat = true
+
+[node name="ButtonAbout" type="Button" parent="MarginContainer/MainMenu"]
+margin_top = 351.0
+margin_right = 711.0
+margin_bottom = 428.0
+rect_min_size = Vector2( 360, 60 )
+custom_fonts/font = ExtResource( 3 )
+text = "About"
+flat = true
+
+[node name="ButtonQuit" type="Button" parent="MarginContainer/MainMenu"]
+margin_top = 448.0
+margin_right = 711.0
+margin_bottom = 525.0
+rect_min_size = Vector2( 360, 60 )
+custom_fonts/font = ExtResource( 3 )
+text = "Quit"
+flat = true
+
+[node name="SettingsMenu" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+margin_right = 711.0
+margin_bottom = 682.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Resolution" type="HBoxContainer" parent="MarginContainer/SettingsMenu"]
+margin_top = 145.0
+margin_right = 712.0
+margin_bottom = 204.0
+
+[node name="Label" type="Label" parent="MarginContainer/SettingsMenu/Resolution"]
+margin_top = 3.0
+margin_right = 227.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 2 )
+text = "Resolution"
+
+[node name="OptionsResolution" type="OptionButton" parent="MarginContainer/SettingsMenu/Resolution"]
+margin_left = 231.0
+margin_right = 712.0
+margin_bottom = 59.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "1920x1080"
+flat = true
+align = 1
+items = [ "1920x1080", null, false, 0, null, "1280x720", null, false, 1, null, "640x360", null, false, 2, null ]
+selected = 0
+
+[node name="Fullscreen" type="HBoxContainer" parent="MarginContainer/SettingsMenu"]
+margin_top = 224.0
+margin_right = 712.0
+margin_bottom = 285.0
+
+[node name="Label" type="Label" parent="MarginContainer/SettingsMenu/Fullscreen"]
+margin_top = 4.0
+margin_right = 219.0
+margin_bottom = 57.0
+custom_fonts/font = ExtResource( 2 )
+text = "Fullscreen"
+
+[node name="Label2" type="Label" parent="MarginContainer/SettingsMenu/Fullscreen"]
+margin_left = 223.0
+margin_top = 23.0
+margin_right = 343.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 120, 0 )
+
+[node name="CheckBoxFullscreen" type="CheckBox" parent="MarginContainer/SettingsMenu/Fullscreen"]
+margin_left = 347.0
+margin_right = 712.0
+margin_bottom = 61.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Off"
+
+[node name="VSync" type="HBoxContainer" parent="MarginContainer/SettingsMenu"]
+margin_top = 305.0
+margin_right = 712.0
+margin_bottom = 366.0
+
+[node name="Label" type="Label" parent="MarginContainer/SettingsMenu/VSync"]
+margin_top = 4.0
+margin_right = 133.0
+margin_bottom = 57.0
+custom_fonts/font = ExtResource( 2 )
+text = "VSync"
+
+[node name="Label2" type="Label" parent="MarginContainer/SettingsMenu/VSync"]
+margin_left = 137.0
+margin_top = 23.0
+margin_right = 342.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 205, 0 )
+
+[node name="CheckBoxVSync" type="CheckBox" parent="MarginContainer/SettingsMenu/VSync"]
+margin_left = 346.0
+margin_right = 712.0
+margin_bottom = 61.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Off"
+
+[node name="Audio" type="HBoxContainer" parent="MarginContainer/SettingsMenu"]
+margin_top = 386.0
+margin_right = 712.0
+margin_bottom = 439.0
+
+[node name="Label" type="Label" parent="MarginContainer/SettingsMenu/Audio"]
+margin_right = 296.0
+margin_bottom = 53.0
+custom_fonts/font = ExtResource( 2 )
+text = "Audio Volume"
+
+[node name="HSliderAudio" type="HSlider" parent="MarginContainer/SettingsMenu/Audio"]
+margin_left = 300.0
+margin_right = 712.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+value = 75.0
+
+[node name="ButtonBack" type="Button" parent="MarginContainer/SettingsMenu"]
+margin_top = 459.0
+margin_right = 712.0
+margin_bottom = 536.0
+rect_min_size = Vector2( 360, 60 )
+custom_fonts/font = ExtResource( 3 )
+text = "Back"
+flat = true
+
+[node name="AboutMenu" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+margin_right = 711.0
+margin_bottom = 682.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ButtonBack" type="Button" parent="MarginContainer/AboutMenu"]
+margin_top = 302.0
+margin_right = 712.0
+margin_bottom = 379.0
+rect_min_size = Vector2( 360, 60 )
+custom_fonts/font = ExtResource( 3 )
+text = "Back"
+flat = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Version" type="Label" parent="."]
+anchor_left = 0.799086
+anchor_top = 0.88496
+anchor_right = 0.991795
+anchor_bottom = 0.985886
+custom_fonts/font = ExtResource( 2 )
+text = "ver. 0.00
+Elegist"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[connection signal="pressed" from="MarginContainer/MainMenu/ButtonStart" to="." method="_on_ButtonStart_pressed"]
+[connection signal="pressed" from="MarginContainer/MainMenu/ButtonSettings" to="." method="_on_ButtonSettings_pressed"]
+[connection signal="pressed" from="MarginContainer/MainMenu/ButtonAbout" to="." method="_on_ButtonAbout_pressed"]
+[connection signal="pressed" from="MarginContainer/MainMenu/ButtonQuit" to="." method="_on_ButtonQuit_pressed"]
+[connection signal="item_selected" from="MarginContainer/SettingsMenu/Resolution/OptionsResolution" to="." method="_on_OptionsResolution_item_selected"]
+[connection signal="toggled" from="MarginContainer/SettingsMenu/Fullscreen/CheckBoxFullscreen" to="." method="_on_CheckBoxFullscreen_toggled"]
+[connection signal="toggled" from="MarginContainer/SettingsMenu/VSync/CheckBoxVSync" to="." method="_on_CheckBoxVSync_toggled"]
+[connection signal="pressed" from="MarginContainer/SettingsMenu/ButtonBack" to="." method="_on_ButtonBack_pressed"]
+[connection signal="pressed" from="MarginContainer/AboutMenu/ButtonBack" to="." method="_on_ButtonBack_pressed"]
