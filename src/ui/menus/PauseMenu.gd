@@ -1,49 +1,54 @@
 extends Control
 
-onready var animation_player = $AnimationPlayer
-
-onready var main_menu = $MarginContainer/MainMenu
-onready var settings_menu = $MarginContainer/SettingsMenu
-onready var about_menu = $MarginContainer/AboutMenu
-
-onready var start_button = $MarginContainer/MainMenu/ButtonStart
-
-onready var back_button_about = $MarginContainer/AboutMenu/ButtonBack
-
-#settings related
+onready var resume_button = $MarginContainer/PauseMenu/ButtonResume
 onready var resolution_options = $MarginContainer/SettingsMenu/Resolution/OptionsResolution
+
+onready var settings_menu = $MarginContainer/SettingsMenu
+onready var pause_menu = $MarginContainer/PauseMenu
+
 onready var fullscreen_checkbox = $MarginContainer/SettingsMenu/Fullscreen/CheckBoxFullscreen
 onready var vsync_checkbox = $MarginContainer/SettingsMenu/VSync/CheckBoxVSync
-onready var audio_slider = $MarginContainer/SettingsMenu/Audio/HSliderAudio
 
-func _ready() -> void:
-	start_button.grab_focus()
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		var pause_state = !get_tree().paused
+		get_tree().paused = pause_state
+		visible = pause_state
+		if pause_state:
+			resume_button.grab_focus()
 
-func _on_ButtonStart_pressed() -> void:
-	assert(get_tree().change_scene("res://src/Main.tscn") == OK)
+
+func _on_ButtonResume_pressed() -> void:
+	if get_tree().paused:
+		get_tree().paused = false
+		visible = false
+
+
+func _on_ButtonRestart_pressed() -> void:
+	assert(get_tree().reload_current_scene() == OK)
+	get_tree().paused = false
+	visible = false
 
 
 func _on_ButtonSettings_pressed() -> void:
-	main_menu.visible = false
+	pause_menu.visible = false
 	settings_menu.visible = true
 	resolution_options.grab_focus()
 
+func _on_ButtonBack_pressed() -> void:
+	pause_menu.visible = true
+	settings_menu.visible = false
+	resume_button.grab_focus()
 
-func _on_ButtonAbout_pressed() -> void:
-	main_menu.visible = false
-	about_menu.visible = true
-	back_button_about.grab_focus()
+func _on_ButtonMainMenu_pressed() -> void:
+	assert(get_tree().change_scene("res://src/levels/TitleScreenStage.tscn") == OK)
+	get_tree().paused = false
 
 
 func _on_ButtonQuit_pressed() -> void:
 	get_tree().quit()
 
 
-func _on_ButtonBack_pressed() -> void:
-	settings_menu.visible = false
-	about_menu.visible = false
-	main_menu.visible = true
-	start_button.grab_focus()
 
 
 func _on_CheckBoxFullscreen_toggled(button_pressed: bool) -> void:

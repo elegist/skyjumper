@@ -1,17 +1,12 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://assets/fonts/aBlackLives.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://src/ui/fonts/philosopher-bold-48.tres" type="DynamicFont" id=2]
-[ext_resource path="res://src/ui/fonts/philosopher-bold-64.tres" type="DynamicFont" id=3]
-[ext_resource path="res://src/ui/menus/TitleScreen.gd" type="Script" id=4]
+[ext_resource path="res://src/ui/menus/PauseMenu.gd" type="Script" id=1]
+[ext_resource path="res://src/ui/fonts/philosopher-bold-64.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/ui/fonts/philosopher-bold-48.tres" type="DynamicFont" id=3]
 
-[sub_resource type="DynamicFont" id=1]
-size = 120
-font_data = ExtResource( 1 )
+[sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="DynamicFont" id=2]
-size = 30
-font_data = ExtResource( 1 )
+[sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -27,56 +22,34 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxEmpty" id=9]
 
-[sub_resource type="StyleBoxEmpty" id=10]
-
-[sub_resource type="StyleBoxEmpty" id=11]
-
-[node name="TitleScreen" type="Control"]
+[node name="PauseMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="VBoxContainer" parent="."]
-anchor_left = 0.0416667
-anchor_top = 0.0740741
-anchor_right = 0.958333
-anchor_bottom = 0.217593
-margin_bottom = -80.0
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.470588 )
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
-
-[node name="MainTitle" type="Label" parent="Title"]
-margin_right = 1759.0
-margin_bottom = 121.0
-custom_fonts/font = SubResource( 1 )
-text = "Sky Jumper"
-align = 1
-valign = 1
-
-[node name="Label2" type="Label" parent="Title"]
-margin_top = 125.0
-margin_right = 1759.0
-margin_bottom = 155.0
-custom_fonts/font = SubResource( 2 )
-text = "Gameplay Mechanic Demo"
-align = 1
-valign = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-anchor_left = 0.0482831
-anchor_top = 0.300651
-anchor_right = 0.419116
-anchor_bottom = 0.932133
+anchor_left = 0.314584
+anchor_top = 0.184259
+anchor_right = 0.685416
+anchor_bottom = 0.815741
 __meta__ = {
 "_edit_lock_": true,
-"_edit_use_anchors_": true
+"_edit_use_anchors_": true,
+"_editor_description_": ""
 }
 
-[node name="MainMenu" type="VBoxContainer" parent="MarginContainer"]
+[node name="PauseMenu" type="VBoxContainer" parent="MarginContainer"]
 margin_right = 711.0
 margin_bottom = 682.0
 size_flags_horizontal = 3
@@ -87,68 +60,84 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="ButtonStart" type="Button" parent="MarginContainer/MainMenu"]
-margin_top = 157.0
+[node name="ButtonResume" type="Button" parent="MarginContainer/PauseMenu"]
+margin_top = 108.0
 margin_right = 711.0
-margin_bottom = 234.0
+margin_bottom = 185.0
 rect_min_size = Vector2( 360, 60 )
 focus_neighbour_top = NodePath("../ButtonQuit")
-focus_neighbour_bottom = NodePath("../ButtonSettings")
-focus_next = NodePath("../ButtonSettings")
+focus_neighbour_bottom = NodePath("../ButtonRestart")
+focus_next = NodePath("../ButtonRestart")
 focus_previous = NodePath("../ButtonQuit")
-custom_styles/focus = SubResource( 3 )
-custom_fonts/font = ExtResource( 3 )
+custom_styles/focus = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
 custom_colors/font_color_pressed = Color( 0.490196, 0.94902, 0.341176, 1 )
-text = "Start Game"
+text = "Resume"
 flat = true
 
-[node name="ButtonSettings" type="Button" parent="MarginContainer/MainMenu"]
-margin_top = 254.0
+[node name="ButtonRestart" type="Button" parent="MarginContainer/PauseMenu"]
+margin_top = 205.0
 margin_right = 711.0
-margin_bottom = 331.0
+margin_bottom = 282.0
 rect_min_size = Vector2( 360, 60 )
-focus_neighbour_top = NodePath("../ButtonStart")
-focus_neighbour_bottom = NodePath("../ButtonAbout")
-focus_next = NodePath("../ButtonAbout")
-focus_previous = NodePath("../ButtonStart")
-custom_styles/focus = SubResource( 4 )
-custom_fonts/font = ExtResource( 3 )
+focus_neighbour_top = NodePath("../ButtonResume")
+focus_neighbour_bottom = NodePath("../ButtonSettings")
+focus_next = NodePath("../ButtonSettings")
+focus_previous = NodePath("../ButtonResume")
+custom_styles/focus = SubResource( 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
+custom_colors/font_color_pressed = Color( 0.490196, 0.94902, 0.341176, 1 )
+text = "Restart current level"
+flat = true
+
+[node name="ButtonSettings" type="Button" parent="MarginContainer/PauseMenu"]
+margin_top = 302.0
+margin_right = 711.0
+margin_bottom = 379.0
+rect_min_size = Vector2( 360, 60 )
+focus_neighbour_top = NodePath("../ButtonRestart")
+focus_neighbour_bottom = NodePath("../ButtonMainMenu")
+focus_next = NodePath("../ButtonMainMenu")
+focus_previous = NodePath("../ButtonRestart")
+custom_styles/focus = SubResource( 3 )
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
 custom_colors/font_color_pressed = Color( 0.490196, 0.94902, 0.341176, 1 )
 text = "Settings"
 flat = true
 
-[node name="ButtonAbout" type="Button" parent="MarginContainer/MainMenu"]
-margin_top = 351.0
+[node name="ButtonMainMenu" type="Button" parent="MarginContainer/PauseMenu"]
+margin_top = 399.0
 margin_right = 711.0
-margin_bottom = 428.0
+margin_bottom = 476.0
 rect_min_size = Vector2( 360, 60 )
 focus_neighbour_top = NodePath("../ButtonSettings")
 focus_neighbour_bottom = NodePath("../ButtonQuit")
 focus_next = NodePath("../ButtonQuit")
 focus_previous = NodePath("../ButtonSettings")
-custom_styles/focus = SubResource( 5 )
-custom_fonts/font = ExtResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
 custom_colors/font_color_pressed = Color( 0.490196, 0.94902, 0.341176, 1 )
-text = "About"
+text = "Back to Main Menu"
 flat = true
 
-[node name="ButtonQuit" type="Button" parent="MarginContainer/MainMenu"]
-margin_top = 448.0
+[node name="ButtonQuit" type="Button" parent="MarginContainer/PauseMenu"]
+margin_top = 496.0
 margin_right = 711.0
-margin_bottom = 525.0
+margin_bottom = 573.0
 rect_min_size = Vector2( 360, 60 )
-focus_neighbour_top = NodePath("../ButtonAbout")
-focus_neighbour_bottom = NodePath("../ButtonStart")
-focus_next = NodePath("../ButtonStart")
-focus_previous = NodePath("../ButtonAbout")
-custom_styles/focus = SubResource( 6 )
-custom_fonts/font = ExtResource( 3 )
+focus_neighbour_top = NodePath("../ButtonMainMenu")
+focus_neighbour_bottom = NodePath("../ButtonResume")
+focus_next = NodePath("../ButtonResume")
+focus_previous = NodePath("../ButtonMainMenu")
+custom_styles/focus = SubResource( 5 )
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
 custom_colors/font_color_pressed = Color( 0.490196, 0.94902, 0.341176, 1 )
-text = "Quit"
+text = "Quit to desktop"
 flat = true
 
 [node name="SettingsMenu" type="VBoxContainer" parent="MarginContainer"]
@@ -172,7 +161,7 @@ margin_bottom = 204.0
 margin_top = 3.0
 margin_right = 227.0
 margin_bottom = 56.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "Resolution"
 
 [node name="OptionsResolution" type="OptionButton" parent="MarginContainer/SettingsMenu/Resolution"]
@@ -184,8 +173,8 @@ focus_neighbour_bottom = NodePath("../../Fullscreen/CheckBoxFullscreen")
 focus_next = NodePath("../../Fullscreen/CheckBoxFullscreen")
 focus_previous = NodePath("../../ButtonBack")
 size_flags_horizontal = 3
-custom_styles/focus = SubResource( 7 )
-custom_fonts/font = ExtResource( 2 )
+custom_styles/focus = SubResource( 6 )
+custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
 custom_colors/font_color_pressed = Color( 0.490196, 0.94902, 0.341176, 1 )
 text = "1920x1080"
@@ -203,7 +192,7 @@ margin_bottom = 285.0
 margin_top = 4.0
 margin_right = 219.0
 margin_bottom = 57.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "Fullscreen"
 
 [node name="Label2" type="Label" parent="MarginContainer/SettingsMenu/Fullscreen"]
@@ -222,8 +211,8 @@ focus_neighbour_bottom = NodePath("../../VSync/CheckBoxVSync")
 focus_next = NodePath("../../VSync/CheckBoxVSync")
 focus_previous = NodePath("../../Resolution/OptionsResolution")
 size_flags_horizontal = 3
-custom_styles/focus = SubResource( 8 )
-custom_fonts/font = ExtResource( 2 )
+custom_styles/focus = SubResource( 7 )
+custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color_disabled = Color( 0.94902, 0.341176, 0.341176, 1 )
 custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
 text = "Off"
@@ -237,7 +226,7 @@ margin_bottom = 366.0
 margin_top = 4.0
 margin_right = 133.0
 margin_bottom = 57.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "VSync"
 
 [node name="Label2" type="Label" parent="MarginContainer/SettingsMenu/VSync"]
@@ -256,8 +245,8 @@ focus_neighbour_bottom = NodePath("../../Audio/HSliderAudio")
 focus_next = NodePath("../../Audio/HSliderAudio")
 focus_previous = NodePath("../../Fullscreen/CheckBoxFullscreen")
 size_flags_horizontal = 3
-custom_styles/focus = SubResource( 9 )
-custom_fonts/font = ExtResource( 2 )
+custom_styles/focus = SubResource( 8 )
+custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color_disabled = Color( 0.94902, 0.341176, 0.341176, 1 )
 custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
 pressed = true
@@ -271,7 +260,7 @@ margin_bottom = 439.0
 [node name="Label" type="Label" parent="MarginContainer/SettingsMenu/Audio"]
 margin_right = 296.0
 margin_bottom = 53.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "Audio Volume"
 
 [node name="HSliderAudio" type="HSlider" parent="MarginContainer/SettingsMenu/Audio"]
@@ -294,59 +283,19 @@ focus_neighbour_top = NodePath("../Audio/HSliderAudio")
 focus_neighbour_bottom = NodePath("../Resolution/OptionsResolution")
 focus_next = NodePath("../Resolution/OptionsResolution")
 focus_previous = NodePath("../Audio/HSliderAudio")
-custom_styles/focus = SubResource( 10 )
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
-custom_colors/font_color_pressed = Color( 0.490196, 0.94902, 0.341176, 1 )
-text = "Back"
-flat = true
-
-[node name="AboutMenu" type="VBoxContainer" parent="MarginContainer"]
-visible = false
-margin_right = 711.0
-margin_bottom = 682.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 20
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="ButtonBack" type="Button" parent="MarginContainer/AboutMenu"]
-margin_top = 302.0
-margin_right = 712.0
-margin_bottom = 379.0
-rect_min_size = Vector2( 360, 60 )
-custom_styles/focus = SubResource( 11 )
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
-custom_colors/font_color_pressed = Color( 0.490196, 0.94902, 0.341176, 1 )
-text = "Back"
-flat = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
-[node name="Version" type="Label" parent="."]
-anchor_left = 0.799086
-anchor_top = 0.88496
-anchor_right = 0.991795
-anchor_bottom = 0.985886
+custom_styles/focus = SubResource( 9 )
 custom_fonts/font = ExtResource( 2 )
-text = "ver. 0.00
-Elegist"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": true
-}
+custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
+custom_colors/font_color_pressed = Color( 0.490196, 0.94902, 0.341176, 1 )
+text = "Back"
+flat = true
 
-[connection signal="pressed" from="MarginContainer/MainMenu/ButtonStart" to="." method="_on_ButtonStart_pressed"]
-[connection signal="pressed" from="MarginContainer/MainMenu/ButtonSettings" to="." method="_on_ButtonSettings_pressed"]
-[connection signal="pressed" from="MarginContainer/MainMenu/ButtonAbout" to="." method="_on_ButtonAbout_pressed"]
-[connection signal="pressed" from="MarginContainer/MainMenu/ButtonQuit" to="." method="_on_ButtonQuit_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseMenu/ButtonResume" to="." method="_on_ButtonResume_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseMenu/ButtonRestart" to="." method="_on_ButtonRestart_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseMenu/ButtonSettings" to="." method="_on_ButtonSettings_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseMenu/ButtonMainMenu" to="." method="_on_ButtonMainMenu_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseMenu/ButtonQuit" to="." method="_on_ButtonQuit_pressed"]
 [connection signal="item_selected" from="MarginContainer/SettingsMenu/Resolution/OptionsResolution" to="." method="_on_OptionsResolution_item_selected"]
 [connection signal="toggled" from="MarginContainer/SettingsMenu/Fullscreen/CheckBoxFullscreen" to="." method="_on_CheckBoxFullscreen_toggled"]
 [connection signal="toggled" from="MarginContainer/SettingsMenu/VSync/CheckBoxVSync" to="." method="_on_CheckBoxVSync_toggled"]
 [connection signal="pressed" from="MarginContainer/SettingsMenu/ButtonBack" to="." method="_on_ButtonBack_pressed"]
-[connection signal="pressed" from="MarginContainer/AboutMenu/ButtonBack" to="." method="_on_ButtonBack_pressed"]

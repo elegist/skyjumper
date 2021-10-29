@@ -11,9 +11,9 @@
 [ext_resource path="res://assets/textures/bricks.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/cobblestone.png" type="Texture" id=10]
 
-[sub_resource type="CubeMesh" id=31]
+[sub_resource type="CubeMesh" id=1]
 
-[sub_resource type="SpatialMaterial" id=32]
+[sub_resource type="SpatialMaterial" id=2]
 flags_world_triplanar = true
 albedo_texture = ExtResource( 10 )
 metallic_specular = 0.1
@@ -33,11 +33,11 @@ depth_flip_binormal = false
 depth_texture = ExtResource( 8 )
 uv1_triplanar = true
 
-[sub_resource type="BoxShape" id=33]
+[sub_resource type="BoxShape" id=3]
 
-[sub_resource type="CylinderMesh" id=34]
+[sub_resource type="CylinderMesh" id=4]
 
-[sub_resource type="SpatialMaterial" id=35]
+[sub_resource type="SpatialMaterial" id=5]
 flags_world_triplanar = true
 albedo_texture = ExtResource( 9 )
 metallic_specular = 0.1
@@ -57,12 +57,12 @@ depth_flip_binormal = false
 depth_texture = ExtResource( 6 )
 uv1_triplanar = true
 
-[sub_resource type="CapsuleShape" id=36]
+[sub_resource type="CapsuleShape" id=6]
 margin = 0.001
 radius = 0.405102
 height = 0.720595
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=7]
 resource_name = "Dash (copy)"
 length = 0.0416667
 tracks/0/type = "transform"
@@ -213,7 +213,7 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, -0.231139, 3.33569, -3.02803, 0, 0, 0, 1, 1, 1, 1, 0.0416667, 1, -0.231139, 3.33569, -3.02803, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=8]
 resource_name = "Fall (copy)"
 length = 1.66667
 loop = true
@@ -365,7 +365,7 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, -0.0714157, 0.612231, -0.684378, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, -0.0714157, 0.61381, -0.683676, 0, 0, 0, 1, 1, 1, 1, 0.133333, 1, -0.0714157, 0.624736, -0.67882, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, -0.0714157, 0.646627, -0.669091, 0, 0, 0, 1, 1, 1, 1, 0.733333, 1, -0.0714157, 0.925489, -0.545152, 0, 0, 0, 1, 1, 1, 1, 0.8, 1, -0.0714158, 0.938252, -0.53948, 0, 0, 0, 1, 1, 1, 1, 0.866667, 1, -0.0714158, 0.940357, -0.538544, 0, 0, 0, 1, 1, 1, 1, 1.66667, 1, -0.0714158, 0.940357, -0.538544, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=39]
+[sub_resource type="Animation" id=9]
 resource_name = "Idle (copy)"
 length = 4.16667
 loop = true
@@ -517,7 +517,7 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 4.16667, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=40]
+[sub_resource type="Animation" id=10]
 resource_name = "Jump (copy)"
 length = 1.66667
 tracks/0/type = "transform"
@@ -668,7 +668,7 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 1.78814e-07, -0.401042, -0.510418, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, 1.78814e-07, -0.401933, -0.511096, 0, 0, 0, 1, 1, 1, 1, 0.133333, 1, 1.78814e-07, -0.408288, -0.515938, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, 1.78814e-07, -0.421629, -0.526103, 0, 0, 0, 1, 1, 1, 1, 0.266667, 1, 1.78814e-07, -0.441273, -0.54107, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, 2.38419e-07, -0.496515, -0.583159, 0, 0, 0, 1, 1, 1, 1, 1.66667, 1, 4.17233e-07, -1.16667, -1.09375, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=41]
+[sub_resource type="Animation" id=11]
 resource_name = "Run (copy)"
 length = 0.708333
 loop = true
@@ -820,7 +820,7 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 4.76837e-07, -2.51495, -1.25537, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, 3.57628e-07, -2.2798, -0.923919, 0, 0, 0, 1, 1, 1, 1, 0.133333, 1, 5.96046e-08, -1.28751, -0.158617, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, 1.78814e-07, -0.2885, -0.417117, 0, 0, 0, 1, 1, 1, 1, 0.266667, 1, 5.96046e-07, 1.3846, -1.52478, 0, 0, 0, 1, 1, 1, 1, 0.333333, 1, 9.53674e-07, 2.56445, -2.41851, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, 7.15256e-07, 2.55305, -1.78666, 0, 0, 0, 1, 1, 1, 1, 0.466667, 1, 3.57628e-07, 2.36274, -0.970439, 0, 0, 0, 1, 1, 1, 1, 0.533333, 1, 1.19209e-07, 1.48118, -0.278489, 0, 0, 0, 1, 1, 1, 1, 0.6, 1, 2.98023e-07, -0.928348, -0.738585, 0, 0, 0, 1, 1, 1, 1, 0.666667, 1, 5.36442e-07, -2.67198, -1.3671, 0, 0, 0, 1, 1, 1, 1, 0.708333, 1, 4.76837e-07, -2.51495, -1.25537, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=42]
+[sub_resource type="Animation" id=12]
 resource_name = "WallrunLeft (copy)"
 length = 0.416667
 loop = true
@@ -972,7 +972,7 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, -1.30643, 2.09636, -1.119, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, -1.30643, 1.77383, -1.08815, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, -1.30643, -1.23641, -0.800216, 0, 0, 0, 1, 1, 1, 1, 0.266667, 1, -1.30643, -0.64485, -0.856799, 0, 0, 0, 1, 1, 1, 1, 0.333333, 1, -1.30643, 0.885382, -1.00317, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, -1.30643, 1.95324, -1.10531, 0, 0, 0, 1, 1, 1, 1, 0.416667, 1, -1.30643, 2.09636, -1.119, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=43]
+[sub_resource type="Animation" id=13]
 resource_name = "WallrunRight (copy)"
 length = 0.416667
 loop = true
@@ -1124,7 +1124,7 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 1.33681, -0.941842, -0.972223, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, 1.33681, -0.684711, -0.972223, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, 1.33681, 1.71518, -0.972223, 0, 0, 0, 1, 1, 1, 1, 0.266667, 1, 1.33681, 1.24357, -0.972223, 0, 0, 0, 1, 1, 1, 1, 0.333333, 1, 1.33681, 0.0236007, -0.972223, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, 1.33681, -0.827744, -0.972223, 0, 0, 0, 1, 1, 1, 1, 0.416667, 1, 1.33681, -0.941842, -0.972223, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=44]
+[sub_resource type="Animation" id=14]
 resource_name = "WallrunUp (copy)"
 length = 0.416667
 loop = true
@@ -1276,31 +1276,31 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 1.19209e-07, 1.41783, -0.354457, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, 1.78814e-07, 1.02618, -0.480257, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, 6.55651e-07, -2.62915, -1.65439, 0, 0, 0, 1, 1, 1, 1, 0.266667, 1, 5.36442e-07, -1.91082, -1.42366, 0, 0, 0, 1, 1, 1, 1, 0.333333, 1, 2.98023e-07, -0.0526621, -0.826795, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, 1.78814e-07, 1.24404, -0.410279, 0, 0, 0, 1, 1, 1, 1, 0.416667, 1, 1.19209e-07, 1.41783, -0.354457, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="AnimationNodeAnimation" id=45]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "Dash (copy)"
 
-[sub_resource type="AnimationNodeAnimation" id=46]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Fall (copy)"
 
-[sub_resource type="AnimationNodeAnimation" id=47]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "Idle (copy)"
 
-[sub_resource type="AnimationNodeAnimation" id=48]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "Jump (copy)"
 
-[sub_resource type="AnimationNodeAnimation" id=49]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "Run (copy)"
 
-[sub_resource type="AnimationNodeAnimation" id=50]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "WallrunLeft (copy)"
 
-[sub_resource type="AnimationNodeAnimation" id=51]
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "WallrunRight (copy)"
 
-[sub_resource type="AnimationNodeAnimation" id=52]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "WallrunUp (copy)"
 
-[sub_resource type="AnimationNodeTransition" id=53]
+[sub_resource type="AnimationNodeTransition" id=23]
 input_count = 3
 xfade_time = 0.2
 input_0/name = "jump"
@@ -1310,7 +1310,7 @@ input_1/auto_advance = false
 input_2/name = "dash"
 input_2/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=54]
+[sub_resource type="AnimationNodeTransition" id=24]
 input_count = 2
 xfade_time = 0.25
 input_0/name = "idle"
@@ -1318,7 +1318,7 @@ input_0/auto_advance = false
 input_1/name = "run"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=55]
+[sub_resource type="AnimationNodeTransition" id=25]
 input_count = 3
 xfade_time = 0.2
 input_0/name = "ground"
@@ -1328,9 +1328,9 @@ input_1/auto_advance = false
 input_2/name = "wall"
 input_2/auto_advance = false
 
-[sub_resource type="AnimationNodeTimeScale" id=56]
+[sub_resource type="AnimationNodeTimeScale" id=26]
 
-[sub_resource type="AnimationNodeTransition" id=57]
+[sub_resource type="AnimationNodeTransition" id=27]
 input_count = 3
 xfade_time = 0.2
 input_0/name = "left"
@@ -1340,36 +1340,36 @@ input_1/auto_advance = false
 input_2/name = "up"
 input_2/auto_advance = false
 
-[sub_resource type="AnimationNodeBlendTree" id=58]
+[sub_resource type="AnimationNodeBlendTree" id=28]
 graph_offset = Vector2( -501, 43.5 )
-nodes/Dash/node = SubResource( 45 )
+nodes/Dash/node = SubResource( 15 )
 nodes/Dash/position = Vector2( -80, 640 )
-nodes/Fall/node = SubResource( 46 )
+nodes/Fall/node = SubResource( 16 )
 nodes/Fall/position = Vector2( -80, 520 )
-nodes/Idle/node = SubResource( 47 )
+nodes/Idle/node = SubResource( 17 )
 nodes/Idle/position = Vector2( -320, 180 )
-nodes/Jump/node = SubResource( 48 )
+nodes/Jump/node = SubResource( 18 )
 nodes/Jump/position = Vector2( -80, 400 )
-nodes/Run/node = SubResource( 49 )
+nodes/Run/node = SubResource( 19 )
 nodes/Run/position = Vector2( -320, 320 )
-nodes/WallRunLeft/node = SubResource( 50 )
+nodes/WallRunLeft/node = SubResource( 20 )
 nodes/WallRunLeft/position = Vector2( 120, 740 )
-nodes/WallRunRight/node = SubResource( 51 )
+nodes/WallRunRight/node = SubResource( 21 )
 nodes/WallRunRight/position = Vector2( 120, 860 )
-nodes/WallRunUp/node = SubResource( 52 )
+nodes/WallRunUp/node = SubResource( 22 )
 nodes/WallRunUp/position = Vector2( 120, 1000 )
-nodes/air_state/node = SubResource( 53 )
+nodes/air_state/node = SubResource( 23 )
 nodes/air_state/position = Vector2( 140, 460 )
-nodes/ground_state/node = SubResource( 54 )
+nodes/ground_state/node = SubResource( 24 )
 nodes/ground_state/position = Vector2( -60, 200 )
-nodes/location/node = SubResource( 55 )
+nodes/location/node = SubResource( 25 )
 nodes/location/position = Vector2( 640, 200 )
 nodes/output/position = Vector2( 800, 200 )
-nodes/run_speed/node = SubResource( 56 )
+nodes/run_speed/node = SubResource( 26 )
 nodes/run_speed/position = Vector2( 140, 220 )
-nodes/wall/node = SubResource( 57 )
+nodes/wall/node = SubResource( 27 )
 nodes/wall/position = Vector2( 400, 820 )
-node_connections = [ "output", 0, "location", "location", 0, "run_speed", "location", 1, "air_state", "location", 2, "wall", "wall", 0, "WallRunLeft", "wall", 1, "WallRunRight", "wall", 2, "WallRunUp", "air_state", 0, "Jump", "air_state", 1, "Fall", "air_state", 2, "Dash", "ground_state", 0, "Idle", "ground_state", 1, "Run", "run_speed", 0, "ground_state" ]
+node_connections = [ "output", 0, "location", "location", 0, "run_speed", "location", 1, "air_state", "location", 2, "wall", "air_state", 0, "Jump", "air_state", 1, "Fall", "air_state", 2, "Dash", "ground_state", 0, "Idle", "ground_state", 1, "Run", "run_speed", 0, "ground_state", "wall", 0, "WallRunLeft", "wall", 1, "WallRunRight", "wall", 2, "WallRunUp" ]
 
 [sub_resource type="ProceduralSky" id=29]
 radiance_size = 0
@@ -1396,31 +1396,31 @@ dof_blur_far_enabled = true
 transform = Transform( 7, 0, 0, 0, 1, 0, 0, 0, 7, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
-mesh = SubResource( 31 )
-material/0 = SubResource( 32 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 33 )
+shape = SubResource( 3 )
 
 [node name="Pillar1" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 8, 0, 0, 0, 0.5, -6, 9, -6 )
-mesh = SubResource( 34 )
-material/0 = SubResource( 35 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="Pillar2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 8, 0, 0, 0, 0.5, 6, 9, -6 )
-mesh = SubResource( 34 )
-material/0 = SubResource( 35 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="Pillar3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 8, 0, 0, 0, 0.5, 6, 9, 6 )
-mesh = SubResource( 34 )
-material/0 = SubResource( 35 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="Pillar4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 8, 0, 0, 0, 0.5, -6, 9, 6 )
-mesh = SubResource( 34 )
-material/0 = SubResource( 35 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="Player" type="KinematicBody" parent="."]
 transform = Transform( 0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, -1.48356, 1, 1.67303 )
@@ -1428,24 +1428,24 @@ collision_layer = 524288
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1.2, 0, 1, -5.24537e-08, 0, 0.864536, 0 )
-shape = SubResource( 36 )
+shape = SubResource( 6 )
 
 [node name="Mesh" type="Spatial" parent="Player"]
 
 [node name="skyjumper_scaled" parent="Player/Mesh" instance=ExtResource( 2 )]
 
 [node name="AnimationPlayer" parent="Player/Mesh/skyjumper_scaled" index="1"]
-"anims/Dash (copy)" = SubResource( 37 )
-"anims/Fall (copy)" = SubResource( 38 )
-"anims/Idle (copy)" = SubResource( 39 )
-"anims/Jump (copy)" = SubResource( 40 )
-"anims/Run (copy)" = SubResource( 41 )
-"anims/WallrunLeft (copy)" = SubResource( 42 )
-"anims/WallrunRight (copy)" = SubResource( 43 )
-"anims/WallrunUp (copy)" = SubResource( 44 )
+"anims/Dash (copy)" = SubResource( 7 )
+"anims/Fall (copy)" = SubResource( 8 )
+"anims/Idle (copy)" = SubResource( 9 )
+"anims/Jump (copy)" = SubResource( 10 )
+"anims/Run (copy)" = SubResource( 11 )
+"anims/WallrunLeft (copy)" = SubResource( 12 )
+"anims/WallrunRight (copy)" = SubResource( 13 )
+"anims/WallrunUp (copy)" = SubResource( 14 )
 
 [node name="AnimationTree" type="AnimationTree" parent="Player/Mesh"]
-tree_root = SubResource( 58 )
+tree_root = SubResource( 28 )
 anim_player = NodePath("../skyjumper_scaled/AnimationPlayer")
 active = true
 parameters/air_state/current = 0
