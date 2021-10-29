@@ -110,7 +110,8 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_wall() && !is_on_floor():
 		can_wall_run = true
-		jump_count = max_jump_count
+		if is_wall_running:
+			jump_count = max_jump_count
 	else:
 		can_wall_run = false
 	
@@ -193,6 +194,8 @@ func apply_wall_run(delta: float) -> void:
 		wall_check_left.enabled = false
 		wall_check_right.enabled = false
 		velocity.y = max_speed
+		velocity.x = -wall_normal.x * max_speed
+		velocity.z = -wall_normal.z * max_speed
 
 func apply_wall_jump() -> void:
 	is_wall_running = false
@@ -206,7 +209,7 @@ func apply_wall_jump() -> void:
 	jump_count -= 1
 
 func apply_animations() -> void:
-	if is_on_wall() && Input.is_action_pressed("dash"):
+	if is_wall_running && Input.is_action_pressed("dash"):
 		animation_tree.set("parameters/location/current", 2)
 		animation_tree.set("parameters/TimeScale/scale", 2.0)
 		if wall_check_left.is_colliding():
@@ -240,3 +243,6 @@ func _on_WallRunTimer_timeout() -> void:
 func add_collectable() -> void:
 	count += 1
 	print(count)
+
+func die() -> void:
+	print("dead")

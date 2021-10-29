@@ -119,7 +119,7 @@ __meta__ = {
 
 [node name="Resolution" type="HBoxContainer" parent="MarginContainer/SettingsMenu"]
 margin_top = 145.0
-margin_right = 712.0
+margin_right = 711.0
 margin_bottom = 204.0
 
 [node name="Label" type="Label" parent="MarginContainer/SettingsMenu/Resolution"]
@@ -131,7 +131,7 @@ text = "Resolution"
 
 [node name="OptionsResolution" type="OptionButton" parent="MarginContainer/SettingsMenu/Resolution"]
 margin_left = 231.0
-margin_right = 712.0
+margin_right = 711.0
 margin_bottom = 59.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
@@ -143,7 +143,7 @@ selected = 0
 
 [node name="Fullscreen" type="HBoxContainer" parent="MarginContainer/SettingsMenu"]
 margin_top = 224.0
-margin_right = 712.0
+margin_right = 711.0
 margin_bottom = 285.0
 
 [node name="Label" type="Label" parent="MarginContainer/SettingsMenu/Fullscreen"]
@@ -162,7 +162,7 @@ rect_min_size = Vector2( 120, 0 )
 
 [node name="CheckBoxFullscreen" type="CheckBox" parent="MarginContainer/SettingsMenu/Fullscreen"]
 margin_left = 347.0
-margin_right = 712.0
+margin_right = 711.0
 margin_bottom = 61.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
@@ -170,7 +170,7 @@ text = "Off"
 
 [node name="VSync" type="HBoxContainer" parent="MarginContainer/SettingsMenu"]
 margin_top = 305.0
-margin_right = 712.0
+margin_right = 711.0
 margin_bottom = 366.0
 
 [node name="Label" type="Label" parent="MarginContainer/SettingsMenu/VSync"]
@@ -189,15 +189,16 @@ rect_min_size = Vector2( 205, 0 )
 
 [node name="CheckBoxVSync" type="CheckBox" parent="MarginContainer/SettingsMenu/VSync"]
 margin_left = 346.0
-margin_right = 712.0
+margin_right = 711.0
 margin_bottom = 61.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
-text = "Off"
+pressed = true
+text = "On"
 
 [node name="Audio" type="HBoxContainer" parent="MarginContainer/SettingsMenu"]
 margin_top = 386.0
-margin_right = 712.0
+margin_right = 711.0
 margin_bottom = 439.0
 
 [node name="Label" type="Label" parent="MarginContainer/SettingsMenu/Audio"]
@@ -208,14 +209,14 @@ text = "Audio Volume"
 
 [node name="HSliderAudio" type="HSlider" parent="MarginContainer/SettingsMenu/Audio"]
 margin_left = 300.0
-margin_right = 712.0
+margin_right = 711.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 value = 75.0
 
 [node name="ButtonBack" type="Button" parent="MarginContainer/SettingsMenu"]
 margin_top = 459.0
-margin_right = 712.0
+margin_right = 711.0
 margin_bottom = 536.0
 rect_min_size = Vector2( 360, 60 )
 custom_fonts/font = ExtResource( 3 )

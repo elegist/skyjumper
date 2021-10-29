@@ -13,7 +13,7 @@ onready var vsync_checkbox = $MarginContainer/SettingsMenu/VSync/CheckBoxVSync
 onready var audio_slider = $MarginContainer/SettingsMenu/Audio/HSliderAudio
 
 func _on_ButtonStart_pressed() -> void:
-	pass # Replace with function body.
+	assert(get_tree().change_scene("res://src/Main.tscn") == OK)
 
 
 func _on_ButtonSettings_pressed() -> void:

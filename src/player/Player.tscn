@@ -1315,7 +1315,7 @@ nodes/run_speed/node = SubResource( 21 )
 nodes/run_speed/position = Vector2( 140, 220 )
 nodes/wall/node = SubResource( 22 )
 nodes/wall/position = Vector2( 400, 820 )
-node_connections = [ "output", 0, "location", "location", 0, "run_speed", "location", 1, "air_state", "location", 2, "wall", "run_speed", 0, "ground_state", "ground_state", 0, "Idle", "ground_state", 1, "Run", "wall", 0, "WallRunLeft", "wall", 1, "WallRunRight", "wall", 2, "WallRunUp", "air_state", 0, "Jump", "air_state", 1, "Fall", "air_state", 2, "Dash" ]
+node_connections = [ "output", 0, "location", "location", 0, "run_speed", "location", 1, "air_state", "location", 2, "wall", "air_state", 0, "Jump", "air_state", 1, "Fall", "air_state", 2, "Dash", "run_speed", 0, "ground_state", "wall", 0, "WallRunLeft", "wall", 1, "WallRunRight", "wall", 2, "WallRunUp", "ground_state", 0, "Idle", "ground_state", 1, "Run" ]
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0 )
@@ -1367,7 +1367,7 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0
 [node name="CameraPivot" type="Spatial" parent="CameraRoot"]
 
 [node name="CameraSpringArm" type="SpringArm" parent="CameraRoot/CameraPivot"]
-transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0 )
+transform = Transform( 1, 6.78802e-08, 1.83783e-07, -1.13134e-07, 0.965926, 0.258819, -1.59952e-07, -0.258819, 0.965926, 0, 0, 0 )
 spring_length = 8.0
 
 [node name="Camera" type="Camera" parent="CameraRoot/CameraPivot/CameraSpringArm"]
