@@ -26,7 +26,7 @@ func _on_ButtonResume_pressed() -> void:
 
 
 func _on_ButtonRestart_pressed() -> void:
-	get_tree().reload_current_scene()
+	assert(get_tree().reload_current_scene() == OK)
 	get_tree().paused = false
 	visible = false
 

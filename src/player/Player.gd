@@ -65,6 +65,8 @@ onready var origin_parent = get_parent()
 var pushed_dust: PackedScene = preload("res://src/particles/PushedDust.tscn")
 onready var move_dust = $MoveDust
 
+onready var ui_animation_player = $CanvasLayer/AnimationPlayer
+
 func _ready() -> void:
 	orientation = mesh.global_transform
 	origin_basis = global_transform.basis
@@ -78,7 +80,7 @@ func _input(event: InputEvent) -> void:
 		camera_x_rotation = clamp(camera_x_rotation + event.relative.y * mouse_sensitivity.y, deg2rad(min_vertical_camera_rotation), deg2rad(max_vertical_camera_rotation))
 		camera_pivot.rotation.x = -camera_x_rotation
 	if event.is_action_pressed("reset"):
-		get_tree().reload_current_scene()
+		assert(get_tree().reload_current_scene() == OK)
 
 func _process(_delta: float) -> void:
 	var camera_target: Vector2 = Vector2.ZERO
@@ -213,7 +215,7 @@ func apply_dash(move_direction: Vector3, delta: float) -> void:
 	is_dashing = false
 	
 
-func apply_wall_run(delta: float) -> void:
+func apply_wall_run(_delta: float) -> void:
 	is_wall_running = true
 	if wall_check_left.is_colliding() || wall_check_right.is_colliding():
 		wall_check_forward.enabled = false
@@ -283,10 +285,12 @@ func add_collectable() -> void:
 func die() -> void:
 	is_alive = false
 	yield(get_tree().create_timer(2.5), "timeout")
-	get_tree().reload_current_scene()
+	assert(get_tree().reload_current_scene() == OK)
 
 func win() -> void:
 	has_won = true
 	is_alive = false
+	ui_animation_player.play("result")
+	yield(ui_animation_player, "animation_finished")
 	yield(get_tree().create_timer(2.5), "timeout")
 	SceneChanger.change_scene("res://src/levels/TitleScreenStage.tscn", "Fade")

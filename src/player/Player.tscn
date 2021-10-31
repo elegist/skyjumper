@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/skyjumper_scaled.glb" type="PackedScene" id=2]
 [ext_resource path="res://src/particles/MoveDust.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/player/MaterialPlayer.tres" type="Material" id=4]
 [ext_resource path="res://src/ui/fonts/philosopher-bold-64.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/fonts/Philosopher-Bold.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 margin = 0.001
@@ -1343,6 +1344,38 @@ nodes/wall/node = SubResource( 24 )
 nodes/wall/position = Vector2( 400, 820 )
 node_connections = [ "output", 0, "location", "location", 0, "run_speed", "location", 1, "air_state", "location", 2, "wall", "location", 3, "Die", "air_state", 0, "Jump", "air_state", 1, "Fall", "air_state", 2, "Dash", "run_speed", 0, "ground_state", "wall", 0, "WallRunLeft", "wall", 1, "WallRunRight", "wall", 2, "WallRunUp", "ground_state", 0, "Idle", "ground_state", 1, "Run" ]
 
+[sub_resource type="DynamicFont" id=27]
+size = 80
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=26]
+resource_name = "result"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 30, 30 ), Vector2( 648, 456 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/Result:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0 )
 collision_layer = 524288
@@ -1403,7 +1436,7 @@ spring_length = 8.0
 
 [node name="Camera" type="Camera" parent="CameraRoot/CameraPivot/CameraSpringArm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8 )
-far = 200.0
+far = 150.0
 
 [node name="WallRunTimer" type="Timer" parent="."]
 process_mode = 0
@@ -1416,39 +1449,44 @@ lifetime = 0.4
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -930.0
+margin_top = -510.0
+margin_right = -305.998
+margin_bottom = -342.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Total" type="Label" parent="CanvasLayer/Control"]
-anchor_left = 0.204629
-anchor_top = 0.0561023
-anchor_right = 0.259317
-anchor_bottom = 0.151473
+margin_left = 392.888
+margin_top = 60.5905
+margin_right = 671.888
+margin_bottom = 131.59
 custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 0.929412, 0.94902, 0.341176, 1 )
 text = "64"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="Amount" type="Label" parent="CanvasLayer/Control"]
-anchor_left = 0.158578
-anchor_top = -0.00948597
-anchor_right = 0.216911
-anchor_bottom = 0.090514
-margin_right = -5.00002
+margin_left = 304.469
+margin_top = -10.2448
+margin_right = 583.469
+margin_bottom = 60.7552
 custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "0"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="CanvasLayer/Control"]
@@ -1462,6 +1500,18 @@ text = "Feathers: "
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Result" type="Label" parent="CanvasLayer/Control"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 24.6942
+margin_top = -166.124
+margin_right = 264.694
+margin_bottom = -78.1243
+custom_fonts/font = SubResource( 27 )
+text = "Result:"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+anims/result = SubResource( 26 )
 
 [connection signal="timeout" from="WallRunTimer" to="." method="_on_WallRunTimer_timeout"]
 
