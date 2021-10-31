@@ -67,6 +67,9 @@ onready var move_dust = $MoveDust
 
 onready var ui_animation_player = $CanvasLayer/AnimationPlayer
 
+var sfx_step = load("res://assets/audio/sfx/step.ogg")
+var sfx_jump = load("res://assets/audio/sfx/jump.ogg")
+
 func _ready() -> void:
 	orientation = mesh.global_transform
 	origin_basis = global_transform.basis
@@ -93,8 +96,6 @@ func _process(_delta: float) -> void:
 	camera_root.orthonormalize()
 	camera_x_rotation = clamp(camera_x_rotation + camera_target.y * right_stick_sensitivity.y, deg2rad(min_vertical_camera_rotation), deg2rad(max_vertical_camera_rotation))
 	camera_pivot.rotation.x = -camera_x_rotation
-	
-	
 
 func _physics_process(delta: float) -> void:
 	if is_alive:
@@ -200,6 +201,8 @@ func apply_jump() -> void:
 	var pushed_dust_instance = pushed_dust.instance()
 	pushed_dust_instance.emitting = true
 	add_child(pushed_dust_instance)
+	
+	AudioManager.play_sfx(sfx_jump, -25, rand_range(1.7, 1.9))
 
 func apply_dash(move_direction: Vector3, delta: float) -> void:
 	is_dashing = true
@@ -239,6 +242,8 @@ func apply_wall_jump() -> void:
 	elif round(wall_normal.z) != 0:
 		dash_direction.z *= -1
 	jump_count -= 1
+	
+	AudioManager.play_sfx(sfx_jump, -25, rand_range(1.6, 1.8))
 
 func apply_animations() -> void:
 	if !is_alive && !has_won:
@@ -294,3 +299,7 @@ func win() -> void:
 	yield(ui_animation_player, "animation_finished")
 	yield(get_tree().create_timer(2.5), "timeout")
 	SceneChanger.change_scene("res://src/levels/TitleScreenStage.tscn", "Fade")
+
+func play_step_sfx() -> void:
+	if is_on_floor() && !is_on_wall():
+		AudioManager.play_sfx(sfx_step, -5, rand_range(0.9, 1.2))

@@ -622,6 +622,7 @@ tracks/20/keys = PoolRealArray( 0, 1, 1.78814e-07, -0.401042, -0.510418, 0, 0, 0
 resource_name = "Run (copy)"
 length = 0.708333
 loop = true
+step = 0.025
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:Head")
 tracks/0/interp = 1
@@ -769,6 +770,23 @@ tracks/20/loop_wrap = true
 tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 4.76837e-07, -2.51495, -1.25537, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, 3.57628e-07, -2.2798, -0.923919, 0, 0, 0, 1, 1, 1, 1, 0.133333, 1, 5.96046e-08, -1.28751, -0.158617, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, 1.78814e-07, -0.2885, -0.417117, 0, 0, 0, 1, 1, 1, 1, 0.266667, 1, 5.96046e-07, 1.3846, -1.52478, 0, 0, 0, 1, 1, 1, 1, 0.333333, 1, 9.53674e-07, 2.56445, -2.41851, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, 7.15256e-07, 2.55305, -1.78666, 0, 0, 0, 1, 1, 1, 1, 0.466667, 1, 3.57628e-07, 2.36274, -0.970439, 0, 0, 0, 1, 1, 1, 1, 0.533333, 1, 1.19209e-07, 1.48118, -0.278489, 0, 0, 0, 1, 1, 1, 1, 0.6, 1, 2.98023e-07, -0.928348, -0.738585, 0, 0, 0, 1, 1, 1, 1, 0.666667, 1, 5.36442e-07, -2.67198, -1.3671, 0, 0, 0, 1, 1, 1, 1, 0.708333, 1, 4.76837e-07, -2.51495, -1.25537, 0, 0, 0, 1, 1, 1, 1 )
+tracks/21/type = "method"
+tracks/21/path = NodePath("../..")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0.2, 0.525 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_step_sfx"
+}, {
+"args": [  ],
+"method": "play_step_sfx"
+} ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "WallrunLeft (copy)"
@@ -1342,14 +1360,13 @@ nodes/run_speed/node = SubResource( 23 )
 nodes/run_speed/position = Vector2( 140, 220 )
 nodes/wall/node = SubResource( 24 )
 nodes/wall/position = Vector2( 400, 820 )
-node_connections = [ "output", 0, "location", "location", 0, "run_speed", "location", 1, "air_state", "location", 2, "wall", "location", 3, "Die", "air_state", 0, "Jump", "air_state", 1, "Fall", "air_state", 2, "Dash", "run_speed", 0, "ground_state", "wall", 0, "WallRunLeft", "wall", 1, "WallRunRight", "wall", 2, "WallRunUp", "ground_state", 0, "Idle", "ground_state", 1, "Run" ]
+node_connections = [ "output", 0, "location", "location", 0, "run_speed", "location", 1, "air_state", "location", 2, "wall", "location", 3, "Die", "air_state", 0, "Jump", "air_state", 1, "Fall", "air_state", 2, "Dash", "ground_state", 0, "Idle", "ground_state", 1, "Run", "run_speed", 0, "ground_state", "wall", 0, "WallRunLeft", "wall", 1, "WallRunRight", "wall", 2, "WallRunUp" ]
 
-[sub_resource type="DynamicFont" id=27]
+[sub_resource type="DynamicFont" id=26]
 size = 80
 font_data = ExtResource( 6 )
 
-[sub_resource type="Animation" id=26]
-resource_name = "result"
+[sub_resource type="Animation" id=27]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control:rect_position")
@@ -1507,11 +1524,11 @@ margin_left = 24.6942
 margin_top = -166.124
 margin_right = 264.694
 margin_bottom = -78.1243
-custom_fonts/font = SubResource( 27 )
+custom_fonts/font = SubResource( 26 )
 text = "Result:"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
-anims/result = SubResource( 26 )
+anims/result = SubResource( 27 )
 
 [connection signal="timeout" from="WallRunTimer" to="." method="_on_WallRunTimer_timeout"]
 
