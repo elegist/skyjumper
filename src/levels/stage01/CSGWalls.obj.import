@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/CSGWalls.obj-0c246ea778694762041b8f55c14d657a.mesh"
+
+[deps]
+
+files=[ "res://.import/CSGWalls.obj-0c246ea778694762041b8f55c14d657a.mesh" ]
+
+source_file="res://src/levels/stage01/CSGWalls.obj"
+dest_files=[ "res://.import/CSGWalls.obj-0c246ea778694762041b8f55c14d657a.mesh", "res://.import/CSGWalls.obj-0c246ea778694762041b8f55c14d657a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

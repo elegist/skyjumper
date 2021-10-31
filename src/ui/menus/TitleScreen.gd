@@ -13,14 +13,13 @@ onready var back_button_about = $MarginContainer/AboutMenu/ButtonBack
 #settings related
 onready var resolution_options = $MarginContainer/SettingsMenu/Resolution/OptionsResolution
 onready var fullscreen_checkbox = $MarginContainer/SettingsMenu/Fullscreen/CheckBoxFullscreen
-onready var vsync_checkbox = $MarginContainer/SettingsMenu/VSync/CheckBoxVSync
 onready var audio_slider = $MarginContainer/SettingsMenu/Audio/HSliderAudio
 
 func _ready() -> void:
 	start_button.grab_focus()
 
 func _on_ButtonStart_pressed() -> void:
-	assert(get_tree().change_scene("res://src/Main.tscn") == OK)
+	SceneChanger.change_scene("res://src/levels/stage01/Stage01.tscn", "Fade")
 
 
 func _on_ButtonSettings_pressed() -> void:
@@ -52,14 +51,6 @@ func _on_CheckBoxFullscreen_toggled(button_pressed: bool) -> void:
 		fullscreen_checkbox.text = "On"
 	else:
 		fullscreen_checkbox.text = "Off"
-
-
-func _on_CheckBoxVSync_toggled(button_pressed: bool) -> void:
-	OS.vsync_enabled = !OS.vsync_enabled
-	if button_pressed:
-		vsync_checkbox.text = "On"
-	else:
-		vsync_checkbox.text = "Off"
 
 
 func _on_OptionsResolution_item_selected(index: int) -> void:

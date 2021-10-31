@@ -1,7 +1,10 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://src/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/skyjumper_scaled.glb" type="PackedScene" id=2]
+[ext_resource path="res://src/particles/MoveDust.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/player/MaterialPlayer.tres" type="Material" id=4]
+[ext_resource path="res://src/ui/fonts/philosopher-bold-64.tres" type="DynamicFont" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 margin = 0.001
@@ -1222,31 +1225,50 @@ tracks/20/imported = true
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 1.19209e-07, 1.41783, -0.354457, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, 1.78814e-07, 1.02618, -0.480257, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, 6.55651e-07, -2.62915, -1.65439, 0, 0, 0, 1, 1, 1, 1, 0.266667, 1, 5.36442e-07, -1.91082, -1.42366, 0, 0, 0, 1, 1, 1, 1, 0.333333, 1, 2.98023e-07, -0.0526621, -0.826795, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, 1.78814e-07, 1.24404, -0.410279, 0, 0, 0, 1, 1, 1, 1, 0.416667, 1, 1.19209e-07, 1.41783, -0.354457, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="AnimationNodeAnimation" id=10]
-animation = "Dash (copy)"
+[sub_resource type="Animation" id=10]
+resource_name = "die"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Armature/Skeleton/Character:material/0:shader_param/Value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -1.0, 1.0 ]
+}
 
 [sub_resource type="AnimationNodeAnimation" id=11]
-animation = "Fall (copy)"
+animation = "Dash (copy)"
 
 [sub_resource type="AnimationNodeAnimation" id=12]
-animation = "Idle (copy)"
+animation = "die"
 
 [sub_resource type="AnimationNodeAnimation" id=13]
-animation = "Jump (copy)"
+animation = "Fall (copy)"
 
 [sub_resource type="AnimationNodeAnimation" id=14]
-animation = "Run (copy)"
+animation = "Idle (copy)"
 
 [sub_resource type="AnimationNodeAnimation" id=15]
-animation = "WallrunLeft (copy)"
+animation = "Jump (copy)"
 
 [sub_resource type="AnimationNodeAnimation" id=16]
-animation = "WallrunRight (copy)"
+animation = "Run (copy)"
 
 [sub_resource type="AnimationNodeAnimation" id=17]
+animation = "WallrunLeft (copy)"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "WallrunRight (copy)"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "WallrunUp (copy)"
 
-[sub_resource type="AnimationNodeTransition" id=18]
+[sub_resource type="AnimationNodeTransition" id=20]
 input_count = 3
 xfade_time = 0.2
 input_0/name = "jump"
@@ -1256,7 +1278,7 @@ input_1/auto_advance = false
 input_2/name = "dash"
 input_2/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=19]
+[sub_resource type="AnimationNodeTransition" id=21]
 input_count = 2
 xfade_time = 0.25
 input_0/name = "idle"
@@ -1264,8 +1286,8 @@ input_0/auto_advance = false
 input_1/name = "run"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=20]
-input_count = 3
+[sub_resource type="AnimationNodeTransition" id=22]
+input_count = 4
 xfade_time = 0.2
 input_0/name = "ground"
 input_0/auto_advance = false
@@ -1273,10 +1295,12 @@ input_1/name = "air"
 input_1/auto_advance = false
 input_2/name = "wall"
 input_2/auto_advance = false
+input_3/name = "death"
+input_3/auto_advance = false
 
-[sub_resource type="AnimationNodeTimeScale" id=21]
+[sub_resource type="AnimationNodeTimeScale" id=23]
 
-[sub_resource type="AnimationNodeTransition" id=22]
+[sub_resource type="AnimationNodeTransition" id=24]
 input_count = 3
 xfade_time = 0.2
 input_0/name = "left"
@@ -1286,36 +1310,38 @@ input_1/auto_advance = false
 input_2/name = "up"
 input_2/auto_advance = false
 
-[sub_resource type="AnimationNodeBlendTree" id=23]
-graph_offset = Vector2( -501, 43.5 )
-nodes/Dash/node = SubResource( 10 )
+[sub_resource type="AnimationNodeBlendTree" id=25]
+graph_offset = Vector2( 441, 179 )
+nodes/Dash/node = SubResource( 11 )
 nodes/Dash/position = Vector2( -80, 640 )
-nodes/Fall/node = SubResource( 11 )
+nodes/Die/node = SubResource( 12 )
+nodes/Die/position = Vector2( 640, 540 )
+nodes/Fall/node = SubResource( 13 )
 nodes/Fall/position = Vector2( -80, 520 )
-nodes/Idle/node = SubResource( 12 )
+nodes/Idle/node = SubResource( 14 )
 nodes/Idle/position = Vector2( -320, 180 )
-nodes/Jump/node = SubResource( 13 )
+nodes/Jump/node = SubResource( 15 )
 nodes/Jump/position = Vector2( -80, 400 )
-nodes/Run/node = SubResource( 14 )
+nodes/Run/node = SubResource( 16 )
 nodes/Run/position = Vector2( -320, 320 )
-nodes/WallRunLeft/node = SubResource( 15 )
+nodes/WallRunLeft/node = SubResource( 17 )
 nodes/WallRunLeft/position = Vector2( 120, 740 )
-nodes/WallRunRight/node = SubResource( 16 )
+nodes/WallRunRight/node = SubResource( 18 )
 nodes/WallRunRight/position = Vector2( 120, 860 )
-nodes/WallRunUp/node = SubResource( 17 )
+nodes/WallRunUp/node = SubResource( 19 )
 nodes/WallRunUp/position = Vector2( 120, 1000 )
-nodes/air_state/node = SubResource( 18 )
+nodes/air_state/node = SubResource( 20 )
 nodes/air_state/position = Vector2( 140, 460 )
-nodes/ground_state/node = SubResource( 19 )
+nodes/ground_state/node = SubResource( 21 )
 nodes/ground_state/position = Vector2( -60, 200 )
-nodes/location/node = SubResource( 20 )
+nodes/location/node = SubResource( 22 )
 nodes/location/position = Vector2( 640, 200 )
 nodes/output/position = Vector2( 800, 200 )
-nodes/run_speed/node = SubResource( 21 )
+nodes/run_speed/node = SubResource( 23 )
 nodes/run_speed/position = Vector2( 140, 220 )
-nodes/wall/node = SubResource( 22 )
+nodes/wall/node = SubResource( 24 )
 nodes/wall/position = Vector2( 400, 820 )
-node_connections = [ "output", 0, "location", "location", 0, "run_speed", "location", 1, "air_state", "location", 2, "wall", "air_state", 0, "Jump", "air_state", 1, "Fall", "air_state", 2, "Dash", "ground_state", 0, "Idle", "ground_state", 1, "Run", "run_speed", 0, "ground_state", "wall", 0, "WallRunLeft", "wall", 1, "WallRunRight", "wall", 2, "WallRunUp" ]
+node_connections = [ "output", 0, "location", "location", 0, "run_speed", "location", 1, "air_state", "location", 2, "wall", "location", 3, "Die", "air_state", 0, "Jump", "air_state", 1, "Fall", "air_state", 2, "Dash", "run_speed", 0, "ground_state", "wall", 0, "WallRunLeft", "wall", 1, "WallRunRight", "wall", 2, "WallRunUp", "ground_state", 0, "Idle", "ground_state", 1, "Run" ]
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0 )
@@ -1329,6 +1355,10 @@ shape = SubResource( 1 )
 [node name="Mesh" type="Spatial" parent="."]
 
 [node name="skyjumper_scaled" parent="Mesh" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0245453, 0 )
+
+[node name="Character" parent="Mesh/skyjumper_scaled/Armature/Skeleton" index="0"]
+material/0 = ExtResource( 4 )
 
 [node name="AnimationPlayer" parent="Mesh/skyjumper_scaled" index="1"]
 "anims/Dash (copy)" = SubResource( 2 )
@@ -1339,9 +1369,10 @@ shape = SubResource( 1 )
 "anims/WallrunLeft (copy)" = SubResource( 7 )
 "anims/WallrunRight (copy)" = SubResource( 8 )
 "anims/WallrunUp (copy)" = SubResource( 9 )
+anims/die = SubResource( 10 )
 
 [node name="AnimationTree" type="AnimationTree" parent="Mesh"]
-tree_root = SubResource( 23 )
+tree_root = SubResource( 25 )
 anim_player = NodePath("../skyjumper_scaled/AnimationPlayer")
 active = true
 parameters/air_state/current = 0
@@ -1377,6 +1408,60 @@ far = 200.0
 [node name="WallRunTimer" type="Timer" parent="."]
 process_mode = 0
 one_shot = true
+
+[node name="MoveDust" parent="." instance=ExtResource( 3 )]
+emitting = false
+lifetime = 0.4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Total" type="Label" parent="CanvasLayer/Control"]
+anchor_left = 0.204629
+anchor_top = 0.0561023
+anchor_right = 0.259317
+anchor_bottom = 0.151473
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.929412, 0.94902, 0.341176, 1 )
+text = "64"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Amount" type="Label" parent="CanvasLayer/Control"]
+anchor_left = 0.158578
+anchor_top = -0.00948597
+anchor_right = 0.216911
+anchor_bottom = 0.090514
+margin_right = -5.00002
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+margin_left = 25.2269
+margin_top = 28.5905
+margin_right = 304.227
+margin_bottom = 99.5905
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.929412, 0.94902, 0.341176, 1 )
+text = "Feathers: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="timeout" from="WallRunTimer" to="." method="_on_WallRunTimer_timeout"]
 

@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/particles/PushedDust.gd" type="Script" id=1]
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 0.4
+emission_shape = 2
+emission_box_extents = Vector3( 0.5, 0.1, 0.5 )
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 16, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 0.05
+linear_accel = -20.0
+radial_accel = 28.0
+radial_accel_random = 0.1
+tangential_accel = 7.0
+tangential_accel_random = 0.1
+scale = 1.1
+scale_random = 0.5
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+params_cull_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 0.72549, 0.72549, 0.72549, 0.27451 )
+
+[sub_resource type="SphereMesh" id=3]
+material = SubResource( 2 )
+radius = 0.125
+height = 0.25
+
+[node name="PushedDust" type="Particles"]
+emitting = false
+lifetime = 1.1
+one_shot = true
+explosiveness = 0.9
+randomness = 0.1
+local_coords = false
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 3 )
+script = ExtResource( 1 )

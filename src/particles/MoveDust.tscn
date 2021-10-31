@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 0.25, 0.1, 0.5 )
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0.8, -2 )
+linear_accel = 1.5
+linear_accel_random = 0.5
+damping = 1.0
+damping_random = 0.5
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+params_cull_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 0.72549, 0.72549, 0.72549, 0.27451 )
+
+[sub_resource type="SphereMesh" id=3]
+material = SubResource( 2 )
+radius = 0.125
+height = 0.25
+
+[node name="MoveDust" type="Particles"]
+lifetime = 0.75
+randomness = 0.5
+local_coords = false
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
