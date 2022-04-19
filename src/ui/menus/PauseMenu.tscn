@@ -18,7 +18,7 @@
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
-[sub_resource type="StyleBoxEmpty" id=9]
+[sub_resource type="StyleBoxEmpty" id=8]
 
 [node name="PauseMenu" type="Control"]
 pause_mode = 2
@@ -206,8 +206,8 @@ margin_left = 347.0
 margin_right = 711.0
 margin_bottom = 61.0
 focus_neighbour_top = NodePath("../../Resolution/OptionsResolution")
-focus_neighbour_bottom = NodePath("../../Audio/HSliderAudio")
-focus_next = NodePath("../../Audio/HSliderAudio")
+focus_neighbour_bottom = NodePath("../../ButtonBack")
+focus_next = NodePath("../../ButtonBack")
 focus_previous = NodePath("../../Resolution/OptionsResolution")
 size_flags_horizontal = 3
 custom_styles/focus = SubResource( 7 )
@@ -216,38 +216,16 @@ custom_colors/font_color_disabled = Color( 0.94902, 0.341176, 0.341176, 1 )
 custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
 text = "Off"
 
-[node name="Audio" type="HBoxContainer" parent="MarginContainer/SettingsMenu"]
-margin_top = 346.0
-margin_right = 711.0
-margin_bottom = 399.0
-
-[node name="Label" type="Label" parent="MarginContainer/SettingsMenu/Audio"]
-margin_right = 296.0
-margin_bottom = 53.0
-custom_fonts/font = ExtResource( 3 )
-text = "Audio Volume"
-
-[node name="HSliderAudio" type="HSlider" parent="MarginContainer/SettingsMenu/Audio"]
-margin_left = 300.0
-margin_right = 711.0
-margin_bottom = 16.0
-focus_neighbour_top = NodePath("../../Fullscreen/CheckBoxFullscreen")
-focus_neighbour_bottom = NodePath("../../ButtonBack")
-focus_next = NodePath("../../ButtonBack")
-focus_previous = NodePath("../../Fullscreen/CheckBoxFullscreen")
-size_flags_horizontal = 3
-value = 75.0
-
 [node name="ButtonBack" type="Button" parent="MarginContainer/SettingsMenu"]
 margin_top = 419.0
 margin_right = 711.0
 margin_bottom = 496.0
 rect_min_size = Vector2( 360, 60 )
-focus_neighbour_top = NodePath("../Audio/HSliderAudio")
+focus_neighbour_top = NodePath("../Fullscreen/CheckBoxFullscreen")
 focus_neighbour_bottom = NodePath("../Resolution/OptionsResolution")
 focus_next = NodePath("../Resolution/OptionsResolution")
-focus_previous = NodePath("../Audio/HSliderAudio")
-custom_styles/focus = SubResource( 9 )
+focus_previous = NodePath("../Fullscreen/CheckBoxFullscreen")
+custom_styles/focus = SubResource( 8 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_hover = Color( 0.929412, 0.94902, 0.341176, 1 )
 custom_colors/font_color_pressed = Color( 0.490196, 0.94902, 0.341176, 1 )

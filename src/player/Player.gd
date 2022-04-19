@@ -302,4 +302,4 @@ func win() -> void:
 
 func play_step_sfx() -> void:
 	if is_on_floor() && !is_on_wall():
-		AudioManager.play_sfx(sfx_step, -5, rand_range(0.9, 1.2))
+		AudioManager.play_sfx(sfx_step, 0, rand_range(0.9, 1.2))

@@ -61,3 +61,7 @@ func _on_OptionsResolution_item_selected(index: int) -> void:
 			OS.set_window_size(Vector2(1280, 720))
 		2:
 			OS.set_window_size(Vector2(640, 360))
+
+
+func _on_HSliderAudio_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
